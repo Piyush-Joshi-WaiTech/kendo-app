@@ -35,27 +35,45 @@
   cursor: pointer;
 }
 
+/* Style for the action buttons */
 .custom-btn {
-  background-color: #8bc34a;
+  background-color: #8bc34a; /* Green background */
   border: none;
-  color: white;
-  padding: 6px 16px;
-  border-radius: 4px;
+  color: white; /* White text */
+  padding: 8px 20px; /* Increased padding for larger size */
+  border-radius: 6px; /* Slightly larger rounded corners */
   font-weight: 500;
+  font-size: 1.1rem; /* Slightly larger font size */
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  white-space: nowrap;
+  white-space: nowrap; /* Prevent text wrapping */
+  transition: background-color 0.3s ease;
 }
 
 .custom-btn i {
-  font-size: 1rem;
-  margin-right: 8px;
+  font-size: 1.2rem; /* Slightly larger icon size */
+  margin-right: 10px; /* Increased space between icon and text */
 }
 
 .custom-btn:hover {
-  background-color: #7cb342;
+  background-color: #7cb342; /* Slightly darker green on hover */
+}
+
+/* Style for the hamburger menu icon */
+.custom-btn.hamburger-btn {
+  background-color: transparent; /* Transparent background */
+  border: 2px solid #8bc34a; /* Green border */
+  color: #8bc34a; /* Green icon color */
+  padding: 8px; /* Increased padding for larger size */
+  border-radius: 6px; /* Slightly larger rounded corners */
+  font-size: 1.5rem; /* Larger icon size */
+}
+
+.custom-btn.hamburger-btn:hover {
+  background-color: #8bc34a; /* Green background on hover */
+  color: white; /* White icon color on hover */
 }
 
 .toggle-container {
@@ -76,9 +94,10 @@
   background-color: #002e6d;
   color: white;
   border: none;
-  padding: 6px 16px;
-  border-radius: 20px;
-  font-weight: 500;
+  padding: 8px 18px;
+  border-radius: 22px;
+  font-weight: 550;
+  font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
   white-space: nowrap;
@@ -124,12 +143,12 @@
 
 /* Dropdown styling */
 .kendo-dropdown {
-  width: 200px;
+  width: 600px !important; /* Increased width for dropdowns */
 }
 
 /* Search bar styling */
 .search-bar {
-  width: 250px;
+  width: 850px !important; /* Increased width for the search bar */
   display: flex;
   align-items: center;
 }
@@ -156,7 +175,7 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   overflow: hidden;
-  width: 250px;
+  width: 350px; /* Increased width for the search box */
 }
 
 .search-box input {
@@ -184,6 +203,85 @@
 
 .search-btn:hover {
   background-color: #7cb342;
+}
+
+/* Kendo Grid Styling */
+.kendo-grid {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+/* Ensure the full header row is blue */
+.kendo-grid .k-grid-header th,
+.kendo-grid .k-grid-header .k-header {
+  background-color: #002e6d !important; /* Dark blue background */
+  color: white !important; /* White text */
+  font-weight: bold;
+  text-align: left;
+  padding: 8px;
+  border-right: 1px solid #ccc; /* Optional: Add a border between columns */
+}
+
+.kendo-grid .k-grid-header th:last-child {
+  border-right: none; /* Remove border for the last column */
+}
+
+.k-grid-header th,
+.k-grid-header .k-header {
+  background-color: #002e6d !important; /* Dark blue background */
+  color: white !important; /* White text */
+  font-weight: bold;
+  text-align: left;
+  padding: 8px;
+  border-right: 1px solid #ccc; /* Optional: Add a border between columns */
+}
+
+.k-grid-header th:last-child {
+  border-right: none; /* Remove border for the last column */
+}
+
+/* Optional: Add hover effect for headers */
+.k-grid-header th:hover {
+  background-color: #004080; /* Slightly lighter blue on hover */
+}
+
+.kendo-grid .k-grid-content {
+  background-color: #fff;
+}
+
+.kendo-grid .k-grid-header th {
+  background-color: #002e6d !important;
+  color: white !important;
+}
+
+.kendo-grid .k-grid-header th,
+.kendo-grid .k-grid-header .k-header {
+  background-color: #002e6d !important;
+  color: white !important;
+}
+
+.kendo-grid .k-grid-header th {
+  text-align: left;
+  padding: 8px;
+  border-right: 1px solid #ccc;
+}
+
+.kendo-grid .k-grid-header th:last-child {
+  border-right: none;
+}
+
+.kendo-grid .k-grid-content td {
+  text-align: left;
+  vertical-align: middle;
+}
+
+.kendo-grid-checkbox-column {
+  text-align: center;
+}
+.kendo-grid {
+  width: 100%;
 }
 
 /* Responsive styles */

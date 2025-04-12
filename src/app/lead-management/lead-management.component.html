@@ -26,7 +26,7 @@
       [data]="allLeadsOptions"
       [(ngModel)]="selectedLead"
       [defaultItem]="'All Leads'"
-      class="kendo-dropdown"
+      class="kendo-dropdown all-leads-dropdown"
     ></kendo-dropdownlist>
 
     <!-- Dropdown: Select Saved Preferences -->
@@ -79,6 +79,117 @@
       <button class="custom-btn">Clear Filters</button>
       <button class="custom-btn">Bulk Edit</button>
       <button class="custom-btn">Save Preferences</button>
+
+      <!-- Hamburger Menu Icon -->
+      <button class="custom-btn hamburger-btn d-flex align-items-center">
+        <i class="bi bi-list"></i>
+        <!-- Bootstrap Icon for horizontal lines -->
+      </button>
     </div>
   </div>
+  <!-- Kendo Grid -->
+  <kendo-grid
+    [data]="gridData"
+    [height]="400"
+    [sortable]="true"
+    [pageable]="false"
+    [filterable]="false"
+    [resizable]="true"
+    [reorderable]="true"
+    scrollable="scrollable"
+    class="kendo-grid"
+  >
+    <kendo-grid-checkbox-column [width]="50"></kendo-grid-checkbox-column>
+    <kendo-grid-column field="actions" title="Actions" [width]="150">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <button class="custom-btn d-flex align-items-center">
+          <i class="bi bi-gear me-1"></i>
+          <!-- Gear Icon -->
+          Actions
+        </button>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column
+      field="recordId"
+      title="Record Id"
+      [width]="150"
+    ></kendo-grid-column>
+    <kendo-grid-column
+      field="lastName"
+      title="Last Name"
+      [width]="150"
+    ></kendo-grid-column>
+    <kendo-grid-column
+      field="firstName"
+      title="First Name"
+      [width]="150"
+    ></kendo-grid-column>
+    <kendo-grid-column
+      field="email"
+      title="Primary Email Address"
+      [width]="200"
+    ></kendo-grid-column>
+    <kendo-grid-column
+      field="phoneType"
+      title="Primary Phone Type"
+      [width]="200"
+    ></kendo-grid-column>
+    <kendo-grid-column
+      field="leadId"
+      title="LMP Lead Id"
+      [width]="150"
+    ></kendo-grid-column>
+    <kendo-grid-column
+      field="appointmentType"
+      title="Appointment Type"
+      [width]="150"
+    ></kendo-grid-column>
+    <kendo-grid-column
+      field="bookingAgency"
+      title="Booking Agency"
+      [width]="150"
+    ></kendo-grid-column>
+    <kendo-grid-column
+      field="status"
+      title="Status"
+      [width]="150"
+    ></kendo-grid-column>
+    <kendo-grid-column
+      field="priority"
+      title="Priority"
+      [width]="150"
+    ></kendo-grid-column>
+    <kendo-grid-column
+      field="createdDate"
+      title="Created Date"
+      [width]="200"
+    ></kendo-grid-column>
+    <kendo-grid-column
+      field="updatedDate"
+      title="Updated Date"
+      [width]="200"
+    ></kendo-grid-column>
+    <kendo-grid-column
+      field="assignedTo"
+      title="Assigned To"
+      [width]="150"
+    ></kendo-grid-column>
+    <kendo-grid-column
+      field="department"
+      title="Department"
+      [width]="150"
+    ></kendo-grid-column>
+    <kendo-grid-column
+      field="region"
+      title="Region"
+      [width]="150"
+    ></kendo-grid-column>
+    <kendo-grid-column
+      field="comments"
+      title="Comments"
+      [width]="200"
+    ></kendo-grid-column>
+  </kendo-grid>
 </div>
+
+<style></style>

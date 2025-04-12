@@ -26,7 +26,6 @@
             ],
             "styles": [
               "node_modules/@progress/kendo-theme-default/dist/all.css",
-              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -86,12 +85,7 @@
               }
             ],
             "styles": [
-              {
-                "input": "node_modules/@progress/kendo-theme-default/dist/all.css"
-              },
-              {
-                "input": "node_modules/@progress/kendo-font-icons/dist/index.css"
-              },
+              "node_modules/@progress/kendo-theme-default/dist/all.css",
               "src/styles.css"
             ],
             "scripts": []

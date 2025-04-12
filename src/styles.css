@@ -1,1 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+.k-grid-header th,
+.k-grid-header .k-header {
+  background-color: #002e6d !important;
+  color: white !important;
+  font-weight: bold;
+}
