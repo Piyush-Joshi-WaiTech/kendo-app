@@ -1,12 +1,10 @@
-/* Title styling */
 .page-title {
   color: #8bc34a;
-  font-weight: bold;
+  font-weight: bolder;
   font-size: 1.5rem;
   margin: 16px 0;
 }
 
-/* Toolbar layout */
 .page-toolbar {
   display: flex;
   justify-content: space-between;
@@ -14,21 +12,20 @@
   margin-bottom: 16px;
 }
 
-/* Buttons container */
 .action-buttons {
   display: flex;
   align-items: center;
-  margin-right: 10px;
+  gap: 0.5rem;
+  margin-left: auto;
 }
 
-/* Checkbox styling */
 .form-check {
   display: flex;
   align-items: center;
 }
 
 .form-check-input {
-  accent-color: #8bc34a; /* Matches the theme color */
+  accent-color: #8bc34a;
   cursor: pointer;
 }
 
@@ -38,17 +35,18 @@
   cursor: pointer;
 }
 
-/* Button styling */
 .custom-btn {
   background-color: #8bc34a;
   border: none;
   color: white;
-  padding: 6px 12px;
+  padding: 6px 16px;
   border-radius: 4px;
   font-weight: 500;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  white-space: nowrap;
 }
 
 .custom-btn i {
@@ -58,14 +56,217 @@
 
 .custom-btn:hover {
   background-color: #7cb342;
-  cursor: pointer;
 }
 
-/* Spacing adjustments */
+.toggle-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+  justify-content: flex-end;
+}
+.toggle-wrapper {
+  margin-left: 400px;
+  display: flex;
+  align-items: center;
+}
+
+/* Toggle button styling */
+.toggle-btn {
+  background-color: #002e6d;
+  color: white;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+}
+
+.toggle-btn.active-green {
+  background-color: #8bc34a;
+}
+
+.toggle-btn.active-blue {
+  background-color: #002e6d;
+}
+
+.toggle-btn:hover {
+  opacity: 0.9;
+}
+
 .me-3 {
-  margin-right: 1rem; /* Space between checkbox and Export to Excel button */
+  margin-right: 1rem;
 }
 
 .me-2 {
-  margin-right: 0.5rem; /* Space between Export to Excel and Create button */
+  margin-right: 0.5rem;
+}
+
+/* Filters container styling */
+.filters-container {
+  border: 2px solid #8bc34a;
+  border-radius: 8px;
+  padding: 24px;
+  margin: 16px 0;
+  background-color: #fff;
+  min-height: 300px;
+}
+
+/* Filters row styling */
+.filters-row {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Dropdown styling */
+.kendo-dropdown {
+  width: 200px;
+}
+
+/* Search bar styling */
+.search-bar {
+  width: 250px;
+  display: flex;
+  align-items: center;
+}
+
+.search-bar input {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 6px 12px;
+  outline: none;
+  font-size: 1rem;
+}
+
+/* Search icon styling */
+.search-icon {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  width: 250px;
+}
+
+.search-box input {
+  border: none;
+  padding: 6px 12px;
+  outline: none;
+  flex: 1;
+}
+
+.search-btn {
+  background-color: #8bc34a;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.search-btn i {
+  font-size: 1rem;
+}
+
+.search-btn:hover {
+  background-color: #7cb342;
+}
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+  .filters-row {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .toggle-wrapper {
+    margin-left: 0;
+    justify-content: flex-start;
+  }
+
+  .action-buttons {
+    margin-left: 0;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .search-bar,
+  .search-icon {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .filters-container {
+    padding: 16px;
+  }
+
+  .filters-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .toggle-container {
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .custom-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .search-bar {
+    width: 100%;
+  }
+
+  .search-icon {
+    width: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-title {
+    font-size: 1.2rem;
+  }
+
+  .custom-btn {
+    padding: 8px;
+  }
+
+  .toggle-btn {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
+
+  .search-bar input {
+    font-size: 0.9rem;
+  }
 }

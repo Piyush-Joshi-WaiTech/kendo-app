@@ -1,22 +1,84 @@
 <div class="page-toolbar d-flex justify-content-between align-items-center">
-  <!-- LEFT: Title -->
   <div class="page-title">Lead Management</div>
 
-  <!-- RIGHT: Buttons -->
   <div class="action-buttons d-flex align-items-center">
-    <!-- Board View Checkbox -->
     <div class="form-check d-flex align-items-center me-3">
       <input class="form-check-input me-1" type="checkbox" id="boardView" />
       <label class="form-check-label" for="boardView">Board View</label>
     </div>
 
-    <!-- Export to Excel Button -->
     <button class="custom-btn d-flex align-items-center me-2">
       <i class="bi bi-download me-1"></i>
       Export to Excel
     </button>
 
-    <!-- Create Button -->
     <button class="custom-btn">Create</button>
+  </div>
+</div>
+
+<div class="filters-container">
+  <!-- First Row -->
+  <div
+    class="filters-row d-flex justify-content-start align-items-center gap-3"
+  >
+    <!-- Dropdown: All Leads -->
+    <kendo-dropdownlist
+      [data]="allLeadsOptions"
+      [(ngModel)]="selectedLead"
+      [defaultItem]="'All Leads'"
+      class="kendo-dropdown"
+    ></kendo-dropdownlist>
+
+    <!-- Dropdown: Select Saved Preferences -->
+    <kendo-dropdownlist
+      [data]="savedPreferencesOptions"
+      [(ngModel)]="selectedPreference"
+      [defaultItem]="'Select Saved Preferences'"
+      class="kendo-dropdown"
+    ></kendo-dropdownlist>
+
+    <!-- Search Bar -->
+    <div class="search-bar">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Type Search Keyword"
+        [(ngModel)]="searchKeyword"
+      />
+    </div>
+
+    <!-- Search Icon -->
+    <div class="search-icon">
+      <button class="search-btn">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+
+    <!-- Toggle Button -->
+    <div class="toggle-wrapper">
+      <div class="toggle-container">
+        <button
+          class="toggle-btn"
+          [class.active-green]="activeToggle === 'Non-Intl'"
+          (click)="setActiveToggle('Non-Intl')"
+        >
+          Non-Intl.
+        </button>
+        <button
+          class="toggle-btn"
+          [class.active-blue]="activeToggle === 'Intl'"
+          (click)="setActiveToggle('Intl')"
+        >
+          Intl.
+        </button>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons d-flex align-items-center gap-2">
+      <button class="custom-btn">Clear Filters</button>
+      <button class="custom-btn">Bulk Edit</button>
+      <button class="custom-btn">Save Preferences</button>
+    </div>
   </div>
 </div>
