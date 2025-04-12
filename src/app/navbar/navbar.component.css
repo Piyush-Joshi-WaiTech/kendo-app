@@ -1,0 +1,142 @@
+.icon-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.icon-box {
+  background-color: #002e6d;
+  color: white;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  position: relative;
+}
+
+.icon-box:hover {
+  background-color: #8bc34a;
+  cursor: pointer;
+}
+
+.badge-dot {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #8bc34a;
+  color: white;
+  font-size: 0.65rem;
+  padding: 2px 6px;
+  border-radius: 8px;
+}
+
+.admin-box {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 15px;
+  background-color: #002e6d;
+  border-radius: 4px;
+  height: 40px;
+}
+
+.admin-initial {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.admin-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1;
+}
+
+.admin-name {
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.admin-role {
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 400;
+  opacity: 0.8;
+}
+.navbar-container {
+  display: flex;
+  padding: 0.75rem;
+  border-radius: 8px;
+  gap: 0.2rem;
+}
+.navbar-underline {
+  height: 5px;
+  background-color: #8bc34a;
+  width: 100%;
+  margin-top: -12px;
+}
+
+.nav-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: white;
+  background-color: #002e6d;
+  padding: 8px 16px;
+  margin-right: 6px;
+  border-radius: 4px 4px 0 0;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.nav-tab.active {
+  background-color: #8bc34a;
+  color: white;
+}
+
+.nav-tab:hover {
+  background-color: #8bc34a;
+  color: white;
+  box-shadow: 0 0 8px #8bc34a;
+}
+
+.nav-tab .badge-dot {
+  background-color: #8bc34a;
+  color: white;
+  font-size: 0.65rem;
+  padding: 2px 6px;
+  border-radius: 8px;
+  margin-left: 4px;
+}
+.custom-btn {
+  background-color: #8bc34a;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.custom-btn i {
+  font-size: 1rem;
+}
+
+.custom-btn:hover {
+  background-color: #7cb342;
+  cursor: pointer;
+}

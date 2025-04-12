@@ -1,0 +1,71 @@
+/* Title styling */
+.page-title {
+  color: #8bc34a;
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin: 16px 0;
+}
+
+/* Toolbar layout */
+.page-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+/* Buttons container */
+.action-buttons {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+/* Checkbox styling */
+.form-check {
+  display: flex;
+  align-items: center;
+}
+
+.form-check-input {
+  accent-color: #8bc34a; /* Matches the theme color */
+  cursor: pointer;
+}
+
+.form-check-label {
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+}
+
+/* Button styling */
+.custom-btn {
+  background-color: #8bc34a;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-btn i {
+  font-size: 1rem;
+  margin-right: 8px;
+}
+
+.custom-btn:hover {
+  background-color: #7cb342;
+  cursor: pointer;
+}
+
+/* Spacing adjustments */
+.me-3 {
+  margin-right: 1rem; /* Space between checkbox and Export to Excel button */
+}
+
+.me-2 {
+  margin-right: 0.5rem; /* Space between Export to Excel and Create button */
+}

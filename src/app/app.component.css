@@ -1,0 +1,7 @@
+.k-button-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: #002b5c; /* custom dark blue */
+  color: white;
+}

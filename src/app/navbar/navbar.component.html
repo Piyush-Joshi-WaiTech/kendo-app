@@ -1,0 +1,48 @@
+<div class="icon-toolbar d-flex align-items-center justify-content-end">
+  <!-- Email Icon -->
+  <div class="icon-box">
+    <i class="bi bi-envelope"></i>
+  </div>
+
+  <!-- Settings Icon -->
+  <div class="icon-box">
+    <i class="bi bi-gear"></i>
+  </div>
+
+  <!-- Notifications Icon with Badge -->
+  <div class="icon-box position-relative">
+    <i class="bi bi-bell"></i>
+    <span class="badge-dot">67</span>
+  </div>
+
+  <!-- Download Icon -->
+  <div class="icon-box">
+    <i class="bi bi-download"></i>
+  </div>
+
+  <!-- Admin Icon -->
+  <div class="icon-box admin-box">
+    <div class="admin-initial">A</div>
+    <div class="admin-details">
+      <div class="admin-name">admin</div>
+      <div class="admin-role">Admin</div>
+    </div>
+  </div>
+</div>
+
+<!-- Navbar -->
+<div class="navbar-container">
+  <div
+    *ngFor="let tab of tabs"
+    class="nav-tab"
+    [ngClass]="{ active: tab.label === 'LEAD MANAGEMENT' }"
+  >
+    <i class="bi" [ngClass]="tab.icon"></i>
+    <span>{{ tab.label }}</span>
+    <span *ngIf="tab.badge" class="badge-dot">
+      {{ tab.badge }}
+    </span>
+  </div>
+</div>
+
+<div class="navbar-underline"></div>
