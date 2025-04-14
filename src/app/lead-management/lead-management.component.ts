@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; // For ngModel
-import { DropDownsModule } from '@progress/kendo-angular-dropdowns'; // For Kendo dropdowns
-import { GridModule } from '@progress/kendo-angular-grid'; // For Kendo Grid
+import { FormsModule } from '@angular/forms';
+import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
+import { GridModule } from '@progress/kendo-angular-grid';
 
 @Component({
   selector: 'app-lead-management',
   standalone: true,
   templateUrl: './lead-management.component.html',
   styleUrls: ['./lead-management.component.css'],
-  imports: [CommonModule, FormsModule, DropDownsModule, GridModule], // Add GridModule here
+  imports: [CommonModule, FormsModule, DropDownsModule, GridModule],
 })
 export class LeadManagementComponent {
   allLeadsOptions = [
@@ -30,16 +30,14 @@ export class LeadManagementComponent {
   selectedLead = this.defaultLead;
   selectedPreference = this.defaultPreference;
 
-  // Search keyword
   searchKeyword = '';
 
-  activeToggle: string = 'Non-Intl'; // Default active toggle
+  activeToggle: string = 'Non-Intl';
 
   setActiveToggle(option: string): void {
     this.activeToggle = option;
   }
 
-  // Sample data for the grid
   gridData = [
     {
       actions: 'Actions',
@@ -98,7 +96,7 @@ export class LeadManagementComponent {
       region: 'East',
       comments: 'Pending approval',
     },
-    // Add 12 more records with similar structure
+
     ...Array(12).fill({
       actions: 'Actions',
       recordId: 111999,

@@ -35,45 +35,43 @@
   cursor: pointer;
 }
 
-/* Style for the action buttons */
 .custom-btn {
-  background-color: #8bc34a; /* Green background */
+  background-color: #8bc34a;
   border: none;
-  color: white; /* White text */
-  padding: 8px 20px; /* Increased padding for larger size */
-  border-radius: 6px; /* Slightly larger rounded corners */
+  color: white;
+  padding: 7px 19px;
+  border-radius: 5px;
   font-weight: 500;
-  font-size: 1.1rem; /* Slightly larger font size */
+  font-size: 1.1rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  white-space: nowrap; /* Prevent text wrapping */
+  white-space: nowrap;
   transition: background-color 0.3s ease;
 }
 
 .custom-btn i {
-  font-size: 1.2rem; /* Slightly larger icon size */
-  margin-right: 10px; /* Increased space between icon and text */
+  font-size: 1.1rem;
+  margin-right: 9px;
 }
 
 .custom-btn:hover {
-  background-color: #7cb342; /* Slightly darker green on hover */
+  background-color: #7cb342;
 }
 
-/* Style for the hamburger menu icon */
 .custom-btn.hamburger-btn {
-  background-color: transparent; /* Transparent background */
-  border: 2px solid #8bc34a; /* Green border */
-  color: #8bc34a; /* Green icon color */
-  padding: 8px; /* Increased padding for larger size */
-  border-radius: 6px; /* Slightly larger rounded corners */
-  font-size: 1.5rem; /* Larger icon size */
+  background-color: transparent;
+  border: 2px solid #8bc34a;
+  color: #8bc34a;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 1.5rem;
 }
 
 .custom-btn.hamburger-btn:hover {
-  background-color: #8bc34a; /* Green background on hover */
-  color: white; /* White icon color on hover */
+  background-color: #8bc34a;
+  color: white;
 }
 
 .toggle-container {
@@ -89,7 +87,6 @@
   align-items: center;
 }
 
-/* Toggle button styling */
 .toggle-btn {
   background-color: #002e6d;
   color: white;
@@ -123,7 +120,6 @@
   margin-right: 0.5rem;
 }
 
-/* Filters container styling */
 .filters-container {
   border: 2px solid #8bc34a;
   border-radius: 8px;
@@ -133,7 +129,6 @@
   min-height: 300px;
 }
 
-/* Filters row styling */
 .filters-row {
   display: flex;
   justify-content: start;
@@ -141,14 +136,12 @@
   gap: 1rem;
 }
 
-/* Dropdown styling */
 .kendo-dropdown {
-  width: 600px !important; /* Increased width for dropdowns */
+  width: 600px !important;
 }
 
-/* Search bar styling */
 .search-bar {
-  width: 850px !important; /* Increased width for the search bar */
+  width: 850px !important;
   display: flex;
   align-items: center;
 }
@@ -162,7 +155,6 @@
   font-size: 1rem;
 }
 
-/* Search icon styling */
 .search-icon {
   display: flex;
   align-items: center;
@@ -175,7 +167,7 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   overflow: hidden;
-  width: 350px; /* Increased width for the search box */
+  width: 350px;
 }
 
 .search-box input {
@@ -205,7 +197,6 @@
   background-color: #7cb342;
 }
 
-/* Kendo Grid Styling */
 .kendo-grid {
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -213,38 +204,36 @@
   font-size: 14px;
 }
 
-/* Ensure the full header row is blue */
 .kendo-grid .k-grid-header th,
 .kendo-grid .k-grid-header .k-header {
-  background-color: #002e6d !important; /* Dark blue background */
-  color: white !important; /* White text */
+  background-color: #002e6d !important;
+  color: white !important;
   font-weight: bold;
   text-align: left;
   padding: 8px;
-  border-right: 1px solid #ccc; /* Optional: Add a border between columns */
+  border-right: 1px solid #ccc;
 }
 
 .kendo-grid .k-grid-header th:last-child {
-  border-right: none; /* Remove border for the last column */
+  border-right: none;
 }
 
 .k-grid-header th,
 .k-grid-header .k-header {
-  background-color: #002e6d !important; /* Dark blue background */
-  color: white !important; /* White text */
+  background-color: #002e6d !important;
+  color: white !important;
   font-weight: bold;
   text-align: left;
   padding: 8px;
-  border-right: 1px solid #ccc; /* Optional: Add a border between columns */
+  border-right: 1px solid #ccc;
 }
 
 .k-grid-header th:last-child {
-  border-right: none; /* Remove border for the last column */
+  border-right: none;
 }
 
-/* Optional: Add hover effect for headers */
 .k-grid-header th:hover {
-  background-color: #004080; /* Slightly lighter blue on hover */
+  background-color: #004080;
 }
 
 .kendo-grid .k-grid-content {

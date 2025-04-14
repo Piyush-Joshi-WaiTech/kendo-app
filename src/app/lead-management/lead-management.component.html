@@ -17,11 +17,9 @@
 </div>
 
 <div class="filters-container">
-  <!-- First Row -->
   <div
     class="filters-row d-flex justify-content-start align-items-center gap-3"
   >
-    <!-- Dropdown: All Leads -->
     <kendo-dropdownlist
       [data]="allLeadsOptions"
       [(ngModel)]="selectedLead"
@@ -29,7 +27,6 @@
       class="kendo-dropdown all-leads-dropdown"
     ></kendo-dropdownlist>
 
-    <!-- Dropdown: Select Saved Preferences -->
     <kendo-dropdownlist
       [data]="savedPreferencesOptions"
       [(ngModel)]="selectedPreference"
@@ -80,10 +77,8 @@
       <button class="custom-btn">Bulk Edit</button>
       <button class="custom-btn">Save Preferences</button>
 
-      <!-- Hamburger Menu Icon -->
       <button class="custom-btn hamburger-btn d-flex align-items-center">
         <i class="bi bi-list"></i>
-        <!-- Bootstrap Icon for horizontal lines -->
       </button>
     </div>
   </div>
