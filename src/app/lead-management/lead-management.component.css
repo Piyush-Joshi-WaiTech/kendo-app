@@ -25,14 +25,21 @@
 }
 
 .form-check-input {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  border: 2px solid #8bc34a;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   accent-color: #8bc34a;
   cursor: pointer;
 }
 
 .form-check-label {
-  font-weight: 500;
+  font-size: 1.2rem;
+  font-weight: 400;
   color: #333;
-  cursor: pointer;
 }
 
 .custom-btn {
@@ -370,17 +377,17 @@
   }
 
   .search-bar {
-    width: 100%; /* Full width for search bar */
+    width: 100%;
   }
 
   .search-icon {
-    width: auto; /* Adjust icon width */
-    margin-left: 0; /* Remove left margin */
+    width: auto;
+    margin-left: 0;
   }
 
   .kendo-dropdown.all-leads-dropdown,
   .kendo-dropdown.saved-pref-dropdown {
-    width: 100% !important; /* Full width for dropdowns */
+    width: 100% !important;
   }
 }
 
@@ -404,15 +411,15 @@
 
   .kendo-dropdown.all-leads-dropdown,
   .kendo-dropdown.saved-pref-dropdown {
-    width: 100% !important; /* Full width for dropdowns */
+    width: 100% !important;
   }
 
   .search-bar {
-    width: 100%; /* Full width for search bar */
+    width: 100%;
   }
 
   .search-icon {
-    width: auto; /* Adjust icon width */
-    margin-left: 0; /* Remove left margin */
+    width: auto;
+    margin-left: 0;
   }
 }

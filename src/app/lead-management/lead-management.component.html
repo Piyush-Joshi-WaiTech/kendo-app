@@ -1,14 +1,18 @@
 <div class="page-toolbar d-flex justify-content-between align-items-center">
-  <div class="page-title">Lead Management</div>
+  <div class="page-title mt-2">Lead Management</div>
 
   <div class="action-buttons d-flex align-items-center">
     <div class="form-check d-flex align-items-center me-3">
-      <input class="form-check-input me-1" type="checkbox" id="boardView" />
-      <label class="form-check-label" for="boardView">Board View</label>
+      <input
+        class="form-check-input me-1 mt-2"
+        type="checkbox"
+        id="boardView"
+      />
+      <label class="form-check-label mt-2" for="boardView">Board View</label>
     </div>
 
     <button class="custom-btn d-flex align-items-center me-2">
-      <i class="bi bi-download me-1"></i>
+      <i class="bi bi-download me-1 mt-2"></i>
       Export to Excel
     </button>
 
@@ -94,7 +98,7 @@
     [height]="520"
     [sortable]="true"
     [pageable]="{ buttonCount: 5, pageSizes: true, info: true }"
-    [filterable]="true"
+    [filterable]="false"
     [resizable]="true"
     [reorderable]="true"
     [columnMenu]="true"
@@ -104,7 +108,11 @@
     scrollable="scrollable"
     class="kendo-grid"
   >
-    <kendo-grid-checkbox-column [width]="50"></kendo-grid-checkbox-column>
+    <kendo-grid-checkbox-column
+      [columnMenu]="false"
+      inputmode="checkbox"
+      [width]="50"
+    ></kendo-grid-checkbox-column>
     <kendo-grid-column field="actions" title="Actions" [width]="150">
       <ng-template kendoGridCellTemplate let-dataItem>
         <button class="custom-btn d-flex align-items-center">
@@ -200,5 +208,3 @@
     ></kendo-grid-column>
   </kendo-grid>
 </div>
-
-<style></style>
