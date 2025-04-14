@@ -119,6 +119,13 @@
 .me-2 {
   margin-right: 0.5rem;
 }
+.filters-group {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  gap: 1rem;
+  min-width: 0; /* prevent overflow */
+}
 
 .filters-container {
   border: 2px solid #8bc34a;
@@ -127,6 +134,16 @@
   margin: 16px 0;
   background-color: #fff;
   min-height: 300px;
+}
+.kendo-dropdown.all-leads-dropdown {
+  flex: 1.5;
+  min-height: 35px;
+  min-width: 200px;
+}
+.kendo-dropdown.saved-pref-dropdown {
+  flex: 1.2;
+  min-height: 35px;
+  min-width: 200px;
 }
 
 .filters-row {
@@ -141,12 +158,13 @@
 }
 
 .search-bar {
-  width: 850px !important;
-  display: flex;
-  align-items: center;
+  flex: 2;
+  min-height: 35px;
+  min-width: 250px;
 }
 
 .search-bar input {
+  min-height: 15px;
   width: 100%;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -156,9 +174,12 @@
 }
 
 .search-icon {
+  min-height: 35px;
+  margin-left: 30px;
   display: flex;
   align-items: center;
   height: 100%;
+  flex-shrink: 0;
 }
 
 .search-box {
@@ -269,6 +290,7 @@
 .kendo-grid-checkbox-column {
   text-align: center;
 }
+
 .kendo-grid {
   width: 100%;
 }
@@ -296,6 +318,22 @@
   .search-icon {
     width: 100%;
   }
+
+  .kendo-dropdown.all-leads-dropdown,
+  .kendo-dropdown.saved-pref-dropdown {
+    width: 100% !important; /* Make dropdowns take full width on smaller screens */
+    min-width: 0; /* Prevent overflow */
+  }
+
+  .search-bar {
+    width: 100%; /* Make search bar take full width */
+    min-width: 0; /* Prevent overflow */
+  }
+
+  .search-icon {
+    margin-left: 0; /* Remove left margin for better alignment */
+    justify-content: flex-start; /* Align icon to the left */
+  }
 }
 
 @media (max-width: 768px) {
@@ -312,6 +350,7 @@
   .filters-row {
     flex-direction: column;
     align-items: flex-start;
+    gap: 1rem; /* Add spacing between elements */
   }
 
   .toggle-container {
@@ -331,11 +370,17 @@
   }
 
   .search-bar {
-    width: 100%;
+    width: 100%; /* Full width for search bar */
   }
 
   .search-icon {
-    width: auto;
+    width: auto; /* Adjust icon width */
+    margin-left: 0; /* Remove left margin */
+  }
+
+  .kendo-dropdown.all-leads-dropdown,
+  .kendo-dropdown.saved-pref-dropdown {
+    width: 100% !important; /* Full width for dropdowns */
   }
 }
 
@@ -355,5 +400,19 @@
 
   .search-bar input {
     font-size: 0.9rem;
+  }
+
+  .kendo-dropdown.all-leads-dropdown,
+  .kendo-dropdown.saved-pref-dropdown {
+    width: 100% !important; /* Full width for dropdowns */
+  }
+
+  .search-bar {
+    width: 100%; /* Full width for search bar */
+  }
+
+  .search-icon {
+    width: auto; /* Adjust icon width */
+    margin-left: 0; /* Remove left margin */
   }
 }

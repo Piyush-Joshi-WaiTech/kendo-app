@@ -20,35 +20,41 @@
   <div
     class="filters-row d-flex justify-content-start align-items-center gap-3"
   >
-    <kendo-dropdownlist
-      [data]="allLeadsOptions"
-      [(ngModel)]="selectedLead"
-      [defaultItem]="'All Leads'"
-      class="kendo-dropdown all-leads-dropdown"
-    ></kendo-dropdownlist>
+    <div class="filters-group d-flex align-items-center gap-3 flex-grow-1">
+      <kendo-dropdownlist
+        [data]="allLeadsOptions"
+        [(ngModel)]="selectedLeadValue"
+        [defaultItem]="defaultLead"
+        textField="text"
+        valueField="value"
+        class="kendo-dropdown all-leads-dropdown"
+      ></kendo-dropdownlist>
 
-    <kendo-dropdownlist
-      [data]="savedPreferencesOptions"
-      [(ngModel)]="selectedPreference"
-      [defaultItem]="'Select Saved Preferences'"
-      class="kendo-dropdown"
-    ></kendo-dropdownlist>
+      <kendo-dropdownlist
+        [data]="savedPreferencesOptions"
+        [(ngModel)]="selectedPreferenceValue"
+        [defaultItem]="defaultPreference"
+        textField="text"
+        valueField="value"
+        class="kendo-dropdown saved-pref-dropdown"
+      ></kendo-dropdownlist>
 
-    <!-- Search Bar -->
-    <div class="search-bar">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Type Search Keyword"
-        [(ngModel)]="searchKeyword"
-      />
-    </div>
+      <!-- Search Bar -->
+      <div class="search-bar">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Type Search Keyword"
+          [(ngModel)]="searchKeyword"
+        />
+      </div>
 
-    <!-- Search Icon -->
-    <div class="search-icon">
-      <button class="search-btn">
-        <i class="bi bi-search"></i>
-      </button>
+      <!-- Search Icon -->
+      <div class="search-icon">
+        <button class="search-btn">
+          <i class="bi bi-search"></i>
+        </button>
+      </div>
     </div>
 
     <!-- Toggle Button -->
@@ -85,12 +91,16 @@
   <!-- Kendo Grid -->
   <kendo-grid
     [data]="gridData"
-    [height]="400"
+    [height]="520"
     [sortable]="true"
-    [pageable]="false"
-    [filterable]="false"
+    [pageable]="{ buttonCount: 5, pageSizes: true, info: true }"
+    [filterable]="true"
     [resizable]="true"
     [reorderable]="true"
+    [columnMenu]="true"
+    [pageSize]="pageSize"
+    [skip]="skip"
+    (pageChange)="pageChange($event)"
     scrollable="scrollable"
     class="kendo-grid"
   >
@@ -108,21 +118,25 @@
       field="recordId"
       title="Record Id"
       [width]="150"
+      [filterable]="true"
     ></kendo-grid-column>
     <kendo-grid-column
       field="lastName"
       title="Last Name"
       [width]="150"
+      [filterable]="true"
     ></kendo-grid-column>
     <kendo-grid-column
       field="firstName"
       title="First Name"
       [width]="150"
+      [filterable]="true"
     ></kendo-grid-column>
     <kendo-grid-column
       field="email"
       title="Primary Email Address"
       [width]="200"
+      [filterable]="true"
     ></kendo-grid-column>
     <kendo-grid-column
       field="phoneType"

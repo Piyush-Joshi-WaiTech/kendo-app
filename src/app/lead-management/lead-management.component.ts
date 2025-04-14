@@ -2,7 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
-import { GridModule } from '@progress/kendo-angular-grid';
+import { LEAD_DATA } from './lead-data';
+import {
+  GridModule,
+  GridDataResult,
+  PageChangeEvent,
+} from '@progress/kendo-angular-grid';
 
 @Component({
   selector: 'app-lead-management',
@@ -27,8 +32,8 @@ export class LeadManagementComponent {
   defaultLead = { text: 'All Leads', value: null };
   defaultPreference = { text: 'Select Saved Preference', value: null };
 
-  selectedLead = this.defaultLead;
-  selectedPreference = this.defaultPreference;
+  selectedLeadValue: string | null = this.defaultLead.value;
+  selectedPreferenceValue: string | null = this.defaultPreference.value;
 
   searchKeyword = '';
 
@@ -38,83 +43,21 @@ export class LeadManagementComponent {
     this.activeToggle = option;
   }
 
-  gridData = [
-    {
-      actions: 'Actions',
-      recordId: 111994,
-      lastName: 'TEST',
-      firstName: 'APRILLELEVEN',
-      email: 'TULSI.KULKARNI@WAIIN.COM',
-      phoneType: 'Home (565) 656-5666-6',
-      leadId: 2222000,
-      appointmentType: '',
-      bookingAgency: 2222000,
-      status: 'Active',
-      priority: 'High',
-      createdDate: '2023-01-01',
-      updatedDate: '2023-01-15',
-      assignedTo: 'John Doe',
-      department: 'Sales',
-      region: 'North',
-      comments: 'No comments',
-    },
-    {
-      actions: 'Actions',
-      recordId: 109907,
-      lastName: 'Nat Storage',
-      firstName: 'Marie',
-      email: 'm@e.com',
-      phoneType: 'Home (630) 555-2024',
-      leadId: 2007000,
-      appointmentType: '',
-      bookingAgency: 2007000,
-      status: 'Inactive',
-      priority: 'Medium',
-      createdDate: '2023-02-01',
-      updatedDate: '2023-02-10',
-      assignedTo: 'Jane Smith',
-      department: 'Support',
-      region: 'South',
-      comments: 'Follow-up required',
-    },
-    {
-      actions: 'Actions',
-      recordId: 111962,
-      lastName: 'Pathak 09-04',
-      firstName: 'Pooja',
-      email: 'p.u@gmail.com',
-      phoneType: 'Home (313) 233-3233',
-      leadId: 2222000,
-      appointmentType: 'MS-Pro',
-      bookingAgency: 2222000,
-      status: 'Active',
-      priority: 'Low',
-      createdDate: '2023-03-01',
-      updatedDate: '2023-03-05',
-      assignedTo: 'Alice Johnson',
-      department: 'Marketing',
-      region: 'East',
-      comments: 'Pending approval',
-    },
+  private allData = LEAD_DATA; //All data stored on file lead-data.ts
 
-    ...Array(12).fill({
-      actions: 'Actions',
-      recordId: 111999,
-      lastName: 'Sample',
-      firstName: 'User',
-      email: 'sample.user@example.com',
-      phoneType: 'Mobile (123) 456-7890',
-      leadId: 123456,
-      appointmentType: 'Standard',
-      bookingAgency: 123456,
-      status: 'Active',
-      priority: 'High',
-      createdDate: '2023-04-01',
-      updatedDate: '2023-04-10',
-      assignedTo: 'Default User',
-      department: 'IT',
-      region: 'West',
-      comments: 'No comments',
-    }),
-  ];
+  public gridData: GridDataResult = {
+    data: this.allData.slice(0, 10),
+    total: this.allData.length,
+  };
+
+  public pageSize = 10;
+  public skip = 0;
+
+  public pageChange(event: PageChangeEvent): void {
+    this.skip = event.skip;
+    this.gridData = {
+      data: this.allData.slice(this.skip, this.skip + this.pageSize),
+      total: this.allData.length,
+    };
+  }
 }
