@@ -155,6 +155,7 @@
 .me-2 {
   margin-right: 0.5rem;
 }
+
 .filters-group {
   display: flex;
   align-items: center;
@@ -394,6 +395,49 @@
 /* Highlight selected row */
 .selected-row {
   background-color: #d1e7fd; /* Light blue background */
+}
+
+/* Style for Add/Edit buttons */
+.btn {
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-success {
+  background-color: #28a745;
+  color: white;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+.me-2 {
+  margin-right: 0.5rem;
 }
 
 /* Responsive styles */

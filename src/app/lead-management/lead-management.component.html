@@ -179,6 +179,38 @@
       title="LMP Lead Id"
       [width]="150"
     ></kendo-grid-column>
+    <kendo-grid-column title="Add/Edit" [width]="150" [sticky]="true">
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <div *ngIf="editingRowIndex !== rowIndex; else editTemplate">
+          <button
+            class="btn btn-primary me-2"
+            (click)="editRow(rowIndex)"
+            title="Edit"
+          >
+            Edit
+          </button>
+          <button class="btn btn-success" (click)="addRow()" title="Add">
+            Add
+          </button>
+        </div>
+        <ng-template #editTemplate>
+          <button
+            class="btn btn-success me-2"
+            (click)="updateRow(rowIndex)"
+            title="Update"
+          >
+            Update
+          </button>
+          <button
+            class="btn btn-secondary"
+            (click)="cancelEdit()"
+            title="Cancel"
+          >
+            Cancel
+          </button>
+        </ng-template>
+      </ng-template>
+    </kendo-grid-column>
     <kendo-grid-column
       field="appointmentType"
       title="Appointment Type"

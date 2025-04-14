@@ -62,29 +62,108 @@ export class LeadManagementComponent {
     };
   }
 
-  // Track selected rows
   public selectedRows: Set<number> = new Set<number>();
 
-  // Handle checkbox changes
   public onRowSelectChange(dataItem: any): void {
     if (this.selectedRows.has(dataItem.recordId)) {
-      this.selectedRows.delete(dataItem.recordId); // Deselect row
+      this.selectedRows.delete(dataItem.recordId);
     } else {
-      this.selectedRows.add(dataItem.recordId); // Select row
+      this.selectedRows.add(dataItem.recordId);
     }
   }
 
-  // Apply CSS class to selected rows
   public rowClass = (context: { dataItem: any; index: number }): string => {
     return this.selectedRows.has(context.dataItem.recordId)
       ? 'selected-row'
       : '';
   };
 
-  // Handle deleting a saved preference
   public deletePreference(preference: any): void {
     this.savedPreferencesOptions = this.savedPreferencesOptions.filter(
       (item) => item.value !== preference.value
     );
   }
+
+  public addRecord(): void {
+    const newRecord = {
+      recordId: this.allData.length + 1,
+      lastName: '',
+      firstName: '',
+      email: '',
+      phoneType: '',
+      leadId: '',
+      appointmentType: '',
+      bookingAgency: '',
+      status: '',
+      priority: '',
+      createdDate: new Date(),
+      updatedDate: new Date(),
+      assignedTo: '',
+      department: '',
+      region: '',
+      comments: '',
+    };
+
+    this.allData.unshift(newRecord);
+    this.updateGridData();
+  }
+
+  public editRecord(dataItem: any): void {
+    const recordIndex = this.allData.findIndex(
+      (item) => item.recordId === dataItem.recordId
+    );
+    if (recordIndex !== -1) {
+      const updatedRecord = { ...dataItem, lastName: 'Updated Last Name' }; // Example update
+      this.allData[recordIndex] = updatedRecord;
+      this.updateGridData();
+    }
+  }
+
+  public addRow(): void {
+    const newRecord = {
+      recordId: this.allData.length + 1,
+      lastName: '',
+      firstName: '',
+      email: '',
+      phoneType: '',
+      leadId: '',
+      appointmentType: '',
+      bookingAgency: '',
+      status: '',
+      priority: '',
+      createdDate: new Date(),
+      updatedDate: new Date(),
+      assignedTo: '',
+      department: '',
+      region: '',
+      comments: '',
+    };
+
+    this.allData.unshift(newRecord);
+    this.updateGridData();
+  }
+
+  // Edit an existing row
+  public editRow(rowIndex: number): void {
+    this.editingRowIndex = rowIndex;
+  }
+
+  public updateRow(rowIndex: number): void {
+    this.editingRowIndex = null;
+    this.updateGridData();
+  }
+
+  public cancelEdit(): void {
+    this.editingRowIndex = null;
+  }
+
+  private updateGridData(): void {
+    this.gridData = {
+      data: this.allData.slice(this.skip, this.skip + this.pageSize),
+      total: this.allData.length,
+    };
+  }
+
+  public editingRowIndex: number | null = null;
+  public newRow: any = {};
 }
