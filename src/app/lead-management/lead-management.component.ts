@@ -55,9 +55,36 @@ export class LeadManagementComponent {
 
   public pageChange(event: PageChangeEvent): void {
     this.skip = event.skip;
+    this.pageSize = event.take;
     this.gridData = {
       data: this.allData.slice(this.skip, this.skip + this.pageSize),
       total: this.allData.length,
     };
+  }
+
+  // Track selected rows
+  public selectedRows: Set<number> = new Set<number>();
+
+  // Handle checkbox changes
+  public onRowSelectChange(dataItem: any): void {
+    if (this.selectedRows.has(dataItem.recordId)) {
+      this.selectedRows.delete(dataItem.recordId); // Deselect row
+    } else {
+      this.selectedRows.add(dataItem.recordId); // Select row
+    }
+  }
+
+  // Apply CSS class to selected rows
+  public rowClass = (context: { dataItem: any; index: number }): string => {
+    return this.selectedRows.has(context.dataItem.recordId)
+      ? 'selected-row'
+      : '';
+  };
+
+  // Handle deleting a saved preference
+  public deletePreference(preference: any): void {
+    this.savedPreferencesOptions = this.savedPreferencesOptions.filter(
+      (item) => item.value !== preference.value
+    );
   }
 }

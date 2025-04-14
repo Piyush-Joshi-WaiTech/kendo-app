@@ -15,7 +15,7 @@
 .action-buttons {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
   margin-left: auto;
 }
 
@@ -43,6 +43,7 @@
 }
 
 .custom-btn {
+  margin-right: 8px;
   background-color: #8bc34a;
   border: none;
   color: white;
@@ -119,6 +120,34 @@
   opacity: 0.9;
 }
 
+/* Toggle Group */
+.toggle-group {
+  display: flex;
+  background: #e5e5e5;
+  border-radius: 20px;
+  overflow: hidden;
+  height: 36px;
+}
+
+/* Toggle Button */
+.toggle-btn {
+  border: none;
+  background: none;
+  padding: 5px 15px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2b2b2b;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Active Toggle Button */
+.toggle-btn.active {
+  background-color: #8bc34a;
+  color: white;
+  border-radius: 20px;
+}
+
 .me-3 {
   margin-right: 1rem;
 }
@@ -151,6 +180,67 @@
   flex: 1.2;
   min-height: 35px;
   min-width: 200px;
+}
+
+/* Style for the dropdown container */
+.saved-pref-dropdown {
+  width: 250px; /* Adjust width to match the design */
+  min-height: 35px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Style for each dropdown item */
+.dropdown-item {
+  display: flex;
+  justify-content: space-between; /* Ensures the delete button stays at the end */
+  align-items: center;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  gap: 5.2rem; /* Add spacing between text and delete button */
+}
+
+/* Highlight the selected item */
+.dropdown-item:hover {
+  background-color: #8bc34a; /* Match the green color in the image */
+  color: white;
+}
+
+/* Style for the delete button */
+.delete-btn {
+  color: #3596dc;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: color 0.3s ease;
+  margin-left: auto; /* Push the delete button to the end */
+}
+
+.delete-btn:hover {
+  color: #a71d2a; /* Darker red on hover */
+}
+
+/* Style for the trash icon */
+.bi-trash {
+  font-size: 16px;
+}
+
+/* Style for the delete button inside the dropdown */
+.saved-pref-dropdown .btn-link {
+  color: #dc3545; /* Red color for delete icon */
+  text-decoration: none;
+}
+
+.saved-pref-dropdown .btn-link:hover {
+  color: #a71d2a; /* Darker red on hover */
+}
+
+.saved-pref-dropdown .bi-trash {
+  font-size: 14px; /* Adjust icon size */
 }
 
 .filters-row {
@@ -269,14 +359,9 @@
 }
 
 .kendo-grid .k-grid-header th {
-  background-color: #002e6d !important;
-  color: white !important;
-}
-
-.kendo-grid .k-grid-header th,
-.kendo-grid .k-grid-header .k-header {
-  background-color: #002e6d !important;
-  color: white !important;
+  background-color: #002e6d;
+  color: white;
+  font-weight: bold;
 }
 
 .kendo-grid .k-grid-header th {
@@ -300,6 +385,15 @@
 
 .kendo-grid {
   width: 100%;
+}
+
+.kendo-grid .k-grid-content tr.k-state-selected {
+  background-color: #fdd1d1 !important;
+}
+
+/* Highlight selected row */
+.selected-row {
+  background-color: #d1e7fd; /* Light blue background */
 }
 
 /* Responsive styles */

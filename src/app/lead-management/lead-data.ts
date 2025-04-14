@@ -59,10 +59,10 @@ export const LEAD_DATA = [
     comments: 'Pending approval',
   },
 
-  ...Array(132).fill({
+  ...Array(32).fill({
     actions: 'Actions',
     recordId: 111999,
-    lastName: 'Sample',
+    lastName: 'Hello',
     firstName: 'User',
     email: 'sample.user@example.com',
     phoneType: 'Mobile (123) 456-7890',
@@ -77,5 +77,24 @@ export const LEAD_DATA = [
     department: 'IT',
     region: 'West',
     comments: 'No comments',
+  }),
+  ...Array(30).fill({
+    actions: 'Actions',
+    recordId: 22222000,
+    lastName: 'Last',
+    firstName: 'User',
+    email: 'Last.user@example.com',
+    phoneType: 'Mobile (021) 123-9878',
+    leadId: 123456,
+    appointmentType: 'Low',
+    bookingAgency: 789456,
+    status: 'Not Active',
+    priority: 'Very High',
+    createdDate: '2020-12-01',
+    updatedDate: '2025-04-10',
+    assignedTo: 'Piyush User',
+    department: 'IT',
+    region: 'East',
+    comments: 'Comments',
   }),
 ];

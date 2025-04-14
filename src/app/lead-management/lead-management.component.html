@@ -41,7 +41,22 @@
         textField="text"
         valueField="value"
         class="kendo-dropdown saved-pref-dropdown"
-      ></kendo-dropdownlist>
+      >
+        <ng-template kendoDropDownListItemTemplate let-dataItem>
+          <div
+            class="dropdown-item d-flex justify-content-between align-items-center"
+          >
+            <span class="dropdown-text">{{ dataItem.text }}</span>
+            <button
+              class="btn btn-link p-0 delete-btn"
+              (click)="deletePreference(dataItem)"
+              title="Delete"
+            >
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+        </ng-template>
+      </kendo-dropdownlist>
 
       <!-- Search Bar -->
       <div class="search-bar">
@@ -63,20 +78,20 @@
 
     <!-- Toggle Button -->
     <div class="toggle-wrapper">
-      <div class="toggle-container">
+      <div class="toggle-group">
         <button
           class="toggle-btn"
-          [class.active-green]="activeToggle === 'Non-Intl'"
+          [class.active]="activeToggle === 'Non-Intl'"
           (click)="setActiveToggle('Non-Intl')"
         >
-          Non-Intl.
+          Non-Intl
         </button>
         <button
           class="toggle-btn"
-          [class.active-blue]="activeToggle === 'Intl'"
+          [class.active]="activeToggle === 'Intl'"
           (click)="setActiveToggle('Intl')"
         >
-          Intl.
+          Intl
         </button>
       </div>
     </div>
@@ -97,7 +112,7 @@
     [data]="gridData"
     [height]="520"
     [sortable]="true"
-    [pageable]="{ buttonCount: 5, pageSizes: true, info: true }"
+    [pageable]="{ buttonCount: 5, pageSizes: [5, 10, 20, 50, 100], info: true }"
     [filterable]="false"
     [resizable]="true"
     [reorderable]="true"
@@ -105,19 +120,27 @@
     [pageSize]="pageSize"
     [skip]="skip"
     (pageChange)="pageChange($event)"
+    [rowClass]="rowClass"
     scrollable="scrollable"
     class="kendo-grid"
   >
-    <kendo-grid-checkbox-column
-      [columnMenu]="false"
-      inputmode="checkbox"
-      [width]="50"
-    ></kendo-grid-checkbox-column>
+    <!-- Checkbox Column -->
+    <kendo-grid-column [width]="50">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <input
+          type="checkbox"
+          class="form-check-input"
+          [checked]="selectedRows.has(dataItem.recordId)"
+          (change)="onRowSelectChange(dataItem)"
+        />
+      </ng-template>
+    </kendo-grid-column>
+
+    <!-- Other Columns -->
     <kendo-grid-column field="actions" title="Actions" [width]="150">
       <ng-template kendoGridCellTemplate let-dataItem>
         <button class="custom-btn d-flex align-items-center">
           <i class="bi bi-gear me-1"></i>
-          <!-- Gear Icon -->
           Actions
         </button>
       </ng-template>
