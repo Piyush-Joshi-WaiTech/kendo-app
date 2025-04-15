@@ -124,8 +124,19 @@
     scrollable="scrollable"
     class="kendo-grid"
   >
-    <!-- Checkbox Column -->
-    <kendo-grid-column [width]="50">
+    <!-- Checkbox Column with custom header -->
+    <kendo-grid-column [width]="50" [columnMenu]="false">
+      <!-- Header Checkbox -->
+      <ng-template kendoGridHeaderTemplate>
+        <input
+          type="checkbox"
+          class="form-check-input"
+          [checked]="allSelected"
+          (change)="toggleSelectAll($event)"
+        />
+      </ng-template>
+
+      <!-- Row Checkboxes -->
       <ng-template kendoGridCellTemplate let-dataItem>
         <input
           type="checkbox"
@@ -220,7 +231,7 @@
         </ng-template>
       </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column field="leadId" title="LMP Lead ID" [width]="150">
+    <kendo-grid-column field="leadId" title="LMP Lead ID" [width]="135">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
         <ng-container *ngIf="editingRowIndex === rowIndex; else viewTemplate">
           <input

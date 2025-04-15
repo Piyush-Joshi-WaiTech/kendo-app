@@ -5,3 +5,7 @@
   color: white !important;
   font-weight: bold;
 }
+/* Change the color of the column menu (three vertical dots) to white */
+.k-grid-column-menu .k-icon {
+  color: white !important; /* Set the color to white */
+}

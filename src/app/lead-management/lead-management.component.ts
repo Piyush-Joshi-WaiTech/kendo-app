@@ -8,15 +8,41 @@ import {
   GridDataResult,
   PageChangeEvent,
 } from '@progress/kendo-angular-grid';
+import { ExcelExportModule } from '@progress/kendo-angular-excel-export';
+import {
+  ExcelExportData,
+  WorkbookOptions,
+} from '@progress/kendo-angular-excel-export';
 
 @Component({
   selector: 'app-lead-management',
   standalone: true,
   templateUrl: './lead-management.component.html',
   styleUrls: ['./lead-management.component.css'],
-  imports: [CommonModule, FormsModule, DropDownsModule, GridModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    DropDownsModule,
+    GridModule,
+    ExcelExportModule,
+  ],
 })
 export class LeadManagementComponent {
+  allSelected: boolean = false;
+
+  toggleSelectAll(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.allSelected = input.checked;
+
+    const data = (this.gridData as GridDataResult).data;
+
+    if (this.allSelected) {
+      data.forEach((item: any) => this.selectedRows.add(item.recordId));
+    } else {
+      this.selectedRows.clear();
+    }
+  }
+
   allLeadsOptions = [
     { text: 'Lead 1', value: 'Lead 1' },
     { text: 'Lead 2', value: 'Lead 2' },
