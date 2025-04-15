@@ -440,6 +440,69 @@
   margin-right: 0.5rem;
 }
 
+/* Dark Mode Grid Styles */
+body.dark-mode .kendo-grid {
+  border: 1px solid #8bc34a; /* Green border */
+}
+
+body.dark-mode .kendo-grid .k-grid-header th {
+  background-color: #002e6d; /* Dark header background */
+  color: white; /* White text */
+}
+
+body.dark-mode .kendo-grid .k-grid-content td {
+  background-color: #1e1e1e; /* Dark cell background */
+  color: #e0e0e0; /* Light text */
+}
+
+body.dark-mode .kendo-grid .k-grid-content tr.k-state-selected {
+  background-color: #8bc34a !important; /* Highlight selected row */
+}
+
+/* Hover effect for records in Dark Mode */
+body.dark-mode .kendo-grid .k-grid-content tr:hover {
+  background-color: #8bc34a !important; /* Green hover effect */
+  color: white !important; /* Ensure text is visible */
+}
+
+/* Board View in Dark Mode */
+body.dark-mode .board-view {
+  background-color: white !important; /* White background for board view */
+  color: black !important; /* Black text for board view */
+}
+
+/* Add/Edit Column in Dark Mode */
+body.dark-mode .kendo-grid-column.add-edit-column {
+  background-color: #1e1e1e; /* Black background for Add/Edit column */
+  color: white; /* White text */
+}
+
+body.dark-mode .kendo-grid-column.add-edit-column .btn {
+  background-color: #8bc34a; /* Green buttons */
+  color: white; /* White text */
+}
+
+body.dark-mode .kendo-grid-column.add-edit-column .btn:hover {
+  background-color: #7cb342; /* Darker green on hover */
+}
+
+/* Night Mode Styles for All Leads and Save Preferences Dropdowns */
+body.dark-mode .kendo-dropdown.all-leads-dropdown,
+body.dark-mode .kendo-dropdown.saved-pref-dropdown {
+  background-color: #1e1e1e; /* Dark background */
+  color: white; /* White text */
+  border: 1px solid #8bc34a; /* Green border */
+}
+
+body.dark-mode .kendo-dropdown.all-leads-dropdown .k-input,
+body.dark-mode .kendo-dropdown.saved-pref-dropdown .k-input {
+  color: white; /* White text for selected value */
+}
+
+body.dark-mode .kendo-dropdown.all-leads-dropdown .k-input::placeholder,
+body.dark-mode .kendo-dropdown.saved-pref-dropdown .k-input::placeholder {
+  color: white; /* White placeholder text */
+}
 
 /* Responsive styles */
 @media (max-width: 1200px) {

@@ -1,4 +1,9 @@
 <div class="icon-toolbar d-flex align-items-center justify-content-end">
+  <!-- Night Mode Button -->
+  <div class="icon-box night-mode-toggle" (click)="toggleNightMode()">
+    <i class="bi bi-moon"></i>
+  </div>
+
   <!-- Email Icon -->
   <div class="icon-box">
     <i class="bi bi-envelope"></i>
@@ -33,15 +38,16 @@
 <!-- Navbar -->
 <div class="navbar-container">
   <div
-    *ngFor="let tab of tabs"
     class="nav-tab"
-    [ngClass]="{ active: tab.label === 'LEAD MANAGEMENT' }"
+    *ngFor="let tab of tabs"
+    [ngClass]="{
+      active: activeTab === tab.label,
+      'lead-management-tab': tab.label === 'LEAD MANAGEMENT'
+    }"
   >
     <i class="bi" [ngClass]="tab.icon"></i>
-    <span>{{ tab.label }}</span>
-    <span *ngIf="tab.badge" class="badge-dot">
-      {{ tab.badge }}
-    </span>
+    {{ tab.label }}
+    <span *ngIf="tab.badge" class="badge-dot">{{ tab.badge }}</span>
   </div>
 </div>
 

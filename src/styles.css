@@ -9,3 +9,214 @@
 .k-grid-column-menu .k-icon {
   color: white !important; /* Set the color to white */
 }
+
+/* Dark Mode Styles */
+body.dark-mode {
+  background-color: #121212; /* Dark background */
+  color: #e0e0e0; /* Light text */
+}
+
+body.dark-mode .page-title {
+  color: #8bc34a; /* Green title color */
+}
+
+body.dark-mode .page-toolbar {
+  background-color: #1e1e1e; /* Dark toolbar background */
+}
+
+body.dark-mode .filters-container {
+  background-color: #1e1e1e; /* Dark filters container */
+  border-color: #8bc34a; /* Green border */
+}
+
+body.dark-mode .kendo-grid {
+  background-color: #1e1e1e; /* Dark grid background */
+  color: #e0e0e0; /* Light text */
+}
+
+body.dark-mode .kendo-grid .k-grid-header th {
+  background-color: #002e6d; /* Dark header background */
+  color: white; /* White text */
+}
+
+body.dark-mode .kendo-grid .k-grid-content tr {
+  background-color: #1e1e1e; /* Dark row background */
+  color: #e0e0e0; /* Light text */
+}
+
+body.dark-mode .kendo-grid .k-grid-content tr.k-state-selected {
+  background-color: #8bc34a !important; /* Highlight selected row */
+}
+
+/* Add/Edit Column in Dark Mode */
+body.dark-mode .kendo-grid-column.add-edit-column {
+  background-color: #1e1e1e !important; /* Black background for Add/Edit column */
+  color: white !important; /* White text */
+}
+
+body.dark-mode .kendo-grid-column.add-edit-column .btn {
+  background-color: #8bc34a !important; /* Green buttons */
+  color: white !important; /* White text */
+}
+
+body.dark-mode .kendo-grid-column.add-edit-column .btn:hover {
+  background-color: #7cb342 !important; /* Darker green on hover */
+}
+
+body.dark-mode .kendo-grid td[aria-colindex="ADD_EDIT_COLUMN_INDEX"] {
+  background-color: #1e1e1e !important; /* Black background for Add/Edit column */
+  color: white !important; /* White text */
+}
+
+body.dark-mode .kendo-grid td[aria-colindex="ADD_EDIT_COLUMN_INDEX"] .btn {
+  background-color: #8bc34a !important; /* Green buttons */
+  color: white !important; /* White text */
+}
+
+body.dark-mode
+  .kendo-grid
+  td[aria-colindex="ADD_EDIT_COLUMN_INDEX"]
+  .btn:hover {
+  background-color: #7cb342 !important; /* Darker green on hover */
+}
+
+body.dark-mode .custom-btn {
+  background-color: #8bc34a; /* Green button background */
+  color: white; /* White text */
+}
+
+body.dark-mode .custom-btn:hover {
+  background-color: #7cb342; /* Darker green on hover */
+}
+
+body.dark-mode .toggle-btn {
+  background-color: #002e6d; /* Dark toggle button */
+  color: white; /* White text */
+}
+
+body.dark-mode .toggle-btn.active {
+  background-color: #8bc34a; /* Green active toggle button */
+  color: white; /* White text */
+}
+
+body.dark-mode .form-check-input {
+  accent-color: #8bc34a; /* Green checkboxes */
+}
+
+body.dark-mode .search-bar input {
+  background-color: #1e1e1e; /* Dark input background */
+  color: #e0e0e0; /* Light text */
+  border: 1px solid #8bc34a; /* Green border */
+}
+
+body.dark-mode .search-btn {
+  background-color: #8bc34a; /* Green search button */
+  color: white; /* White text */
+}
+
+body.dark-mode .search-btn:hover {
+  background-color: #7cb342; /* Darker green on hover */
+}
+
+/* Night Mode Styles for Dropdowns */
+body.dark-mode .kendo-dropdown {
+  background-color: #1e1e1e; /* Dark background for dropdowns */
+  color: white; /* White text for dropdown items */
+  border: 1px solid #8bc34a; /* Green border */
+}
+
+body.dark-mode .kendo-dropdown .k-input {
+  color: white; /* White text for selected dropdown value */
+}
+
+body.dark-mode .kendo-dropdown .k-input::placeholder {
+  color: white; /* White placeholder text */
+}
+
+/* Night Mode Styles for Navigation Tabs */
+body.dark-mode .nav-tab {
+  background-color: black; /* Black background for tabs */
+  color: white; /* White text for tabs */
+}
+
+body.dark-mode .nav-tab.active {
+  background-color: #8bc34a; /* Green background for active tab */
+  color: white; /* White text for active tab */
+}
+
+body.dark-mode .nav-tab:hover {
+  background-color: #8bc34a; /* Green background on hover */
+  color: white; /* White text on hover */
+}
+
+/* Keep Lead Management Tab as it is */
+body.dark-mode .nav-tab.lead-management-tab {
+  background-color: #002e6d; /* Keep the blue background */
+  color: white; /* White text */
+}
+::ng-deep body.dark-mode .kendo-grid td.add-edit-column {
+  background-color: #1e1e1e !important;
+  color: white !important;
+}
+/* ✅ Override row hover background and text in dark mode */
+body.dark-mode .kendo-grid .k-grid-content tr:hover {
+  background-color: #8bc34a !important; /* Green background */
+  color: white !important; /* Ensure text stays white */
+}
+
+/* ✅ Also override cell hover in case Kendo applies to individual cells */
+body.dark-mode .kendo-grid .k-grid-content td:hover {
+  background-color: #8bc34a !important;
+  color: white !important;
+}
+
+/* ✅ If white background still appears, this forces it off */
+body.dark-mode .kendo-grid .k-grid-content tr:hover td {
+  background-color: transparent !important;
+}
+
+/* ✅ Make sure selection doesn’t conflict with hover */
+body.dark-mode .kendo-grid .k-grid-content tr.k-state-selected:hover {
+  background-color: #7cb342 !important;
+  color: white !important;
+}
+/* Make 'Board View' label text white in dark mode */
+body.dark-mode .form-check-label {
+  color: white !important;
+}
+/* Night Mode: Make Add/Edit column cells black */
+body.dark-mode .kendo-grid .k-grid-content td .add-edit-column {
+  background-color: #1e1e1e !important; /* Dark background */
+  color: white !important; /* Light text */
+  padding: 0.5rem; /* Optional: ensure spacing looks nice */
+}
+
+/* Night Mode: Buttons inside Add/Edit column */
+body.dark-mode .kendo-grid .add-edit-column .btn {
+  background-color: #8bc34a !important;
+  color: white !important;
+  border: none;
+}
+
+/* Night Mode: Button hover */
+body.dark-mode .kendo-grid .add-edit-column .btn:hover {
+  background-color: #7cb342 !important;
+}
+/* Light Mode Active */
+.nav-tab.lead-management-tab.active {
+  background-color: #8bc34a !important;
+  color: white !important;
+}
+
+/* Light Mode Hover */
+.nav-tab.lead-management-tab:hover {
+  background-color: #8bc34a !important;
+  color: white !important;
+}
+
+/* Night Mode */
+body.dark-mode .nav-tab.lead-management-tab.active,
+body.dark-mode .nav-tab.lead-management-tab:hover {
+  background-color: #8bc34a !important;
+  color: white !important;
+}

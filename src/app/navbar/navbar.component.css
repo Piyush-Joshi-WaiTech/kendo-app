@@ -123,6 +123,31 @@
   border-radius: 8px;
   margin-left: 4px;
 }
+
+/* Lead Management Tab Active Style */
+.nav-tab.lead-management-tab.active {
+  background-color: #8bc34a !important; /* Green background */
+  color: white !important; /* White text */
+}
+
+/* Lead Management Tab Hover Style */
+.nav-tab.lead-management-tab:hover {
+  background-color: #8bc34a !important; /* Green background on hover */
+  color: white !important; /* White text */
+}
+
+/* Night Mode: Lead Management Tab Active Style */
+body.dark-mode .nav-tab.lead-management-tab.active {
+  background-color: #8bc34a !important; /* Green background */
+  color: white !important; /* White text */
+}
+
+/* Night Mode: Lead Management Tab Hover Style */
+body.dark-mode .nav-tab.lead-management-tab:hover {
+  background-color: #8bc34a !important; /* Green background on hover */
+  color: white !important; /* White text */
+}
+
 .custom-btn {
   background-color: #8bc34a;
   border: none;
@@ -138,5 +163,25 @@
 
 .custom-btn:hover {
   background-color: #7cb342;
+  cursor: pointer;
+}
+
+/* Night Mode Button */
+.night-mode-toggle {
+  background-color: #002e6d; /* Dark blue background */
+  color: white;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+.night-mode-toggle:hover {
+  background-color: #8bc34a; /* Green hover color */
   cursor: pointer;
 }
