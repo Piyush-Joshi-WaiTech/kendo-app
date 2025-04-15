@@ -11,11 +11,87 @@
       <label class="form-check-label mt-2" for="boardView">Board View</label>
     </div>
 
-    <button class="custom-btn d-flex align-items-center me-2">
+    <button
+      class="custom-btn d-flex align-items-center me-2"
+      (click)="exportToExcel()"
+    >
       <i class="bi bi-download me-1 mt-2"></i>
       Export to Excel
     </button>
-
+    <kendo-excelexport
+      #excelExport
+      [data]="gridData.data"
+      fileName="LeadManagementData.xlsx"
+    >
+      <kendo-excelexport-column
+        field="recordId"
+        title="Record Id"
+      ></kendo-excelexport-column>
+      <kendo-excelexport-column
+        field="lastName"
+        title="Last Name"
+      ></kendo-excelexport-column>
+      <kendo-excelexport-column
+        field="firstName"
+        title="First Name"
+      ></kendo-excelexport-column>
+      <kendo-excelexport-column
+        field="email"
+        title="Primary Email Address"
+      ></kendo-excelexport-column>
+      <kendo-excelexport-column
+        field="phoneType"
+        title="Phone Type"
+      ></kendo-excelexport-column>
+      <kendo-excelexport-column
+        field="leadId"
+        title="LMP Lead ID"
+      ></kendo-excelexport-column>
+      <kendo-excelexport-column
+        field="appointmentType"
+        title="Appointment Type"
+      ></kendo-excelexport-column>
+      <kendo-excelexport-column
+        field="syncToMobile"
+        title="Sync to Mobile"
+      ></kendo-excelexport-column>
+      <kendo-excelexport-column
+        field="bookingAgency"
+        title="Booking Agency"
+      ></kendo-excelexport-column>
+      <kendo-excelexport-column
+        field="status"
+        title="Status"
+      ></kendo-excelexport-column>
+      <kendo-excelexport-column
+        field="priority"
+        title="Priority"
+      ></kendo-excelexport-column>
+      <kendo-excelexport-column
+        field="createdDate"
+        title="Created Date"
+      ></kendo-excelexport-column>
+      <kendo-excelexport-column
+        field="updatedDate"
+        title="Updated Date"
+      ></kendo-excelexport-column>
+      <kendo-excelexport-column
+        field="assignedTo"
+        title="Assigned To"
+      ></kendo-excelexport-column>
+      <kendo-excelexport-column
+        field="department"
+        title="Department"
+      ></kendo-excelexport-column>
+      <kendo-excelexport-column
+        field="region"
+        title="Region"
+      ></kendo-excelexport-column>
+      <kendo-excelexport-column
+        field="comments"
+        title="Comments"
+      ></kendo-excelexport-column>
+    </kendo-excelexport>
     <button class="custom-btn">Create</button>
   </div>
 </div>
@@ -301,15 +377,8 @@
       title="Sync to Mobile"
       [width]="150"
     >
-      <!-- Header Checkbox -->
-      <ng-template kendoGridHeaderTemplate>
-        <input
-          type="checkbox"
-          class="form-check-input"
-          [checked]="allSyncSelected"
-          (change)="toggleSyncSelectAll($event)"
-        />
-      </ng-template>
+      <!-- Header Name -->
+      <ng-template kendoGridHeaderTemplate> Sync to Mobile </ng-template>
 
       <!-- Row Checkboxes -->
       <ng-template kendoGridCellTemplate let-dataItem>

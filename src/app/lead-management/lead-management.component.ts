@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
@@ -8,7 +8,10 @@ import {
   GridDataResult,
   PageChangeEvent,
 } from '@progress/kendo-angular-grid';
-import { ExcelExportModule } from '@progress/kendo-angular-excel-export';
+import {
+  ExcelExportComponent,
+  ExcelExportModule,
+} from '@progress/kendo-angular-excel-export';
 import {
   ExcelExportData,
   WorkbookOptions,
@@ -28,6 +31,13 @@ import {
   ],
 })
 export class LeadManagementComponent {
+  @ViewChild('excelExport', { static: false })
+  excelExport!: ExcelExportComponent;
+
+  public exportToExcel(): void {
+    this.excelExport.save();
+  }
+
   allSelected: boolean = false;
 
   toggleSelectAll(event: Event): void {
