@@ -36,7 +36,6 @@ export class LeadManagementComponent {
   selectedPreferenceValue: string | null = this.defaultPreference.value;
 
   searchKeyword = '';
-
   activeToggle: string = 'Non-Intl';
 
   setActiveToggle(option: string): void {
@@ -83,7 +82,7 @@ export class LeadManagementComponent {
 
   public addRecord(): void {
     const newRecord = {
-      recordId: this.allData.length + 1,
+      recordId: null,
       lastName: '',
       firstName: '',
       email: '',
@@ -101,8 +100,15 @@ export class LeadManagementComponent {
       comments: '',
     };
 
-    this.allData.unshift(newRecord);
-    this.updateGridData();
+    const gridCopy = [...this.gridData.data];
+    gridCopy.unshift(newRecord);
+    this.gridData = {
+      data: gridCopy,
+      total: this.allData.length,
+    };
+
+    this.editingRowIndex = 0;
+    this.originalDataItem = JSON.parse(JSON.stringify(newRecord));
   }
 
   public editRecord(dataItem: any): void {
@@ -117,27 +123,7 @@ export class LeadManagementComponent {
   }
 
   public addRow(): void {
-    const newRecord = {
-      recordId: this.allData.length + 1,
-      lastName: '',
-      firstName: '',
-      email: '',
-      phoneType: '',
-      leadId: '',
-      appointmentType: '',
-      bookingAgency: '',
-      status: '',
-      priority: '',
-      createdDate: new Date(),
-      updatedDate: new Date(),
-      assignedTo: '',
-      department: '',
-      region: '',
-      comments: '',
-    };
-
-    this.allData.unshift(newRecord);
-    this.updateGridData();
+    this.addRecord();
   }
 
   editingRowIndex: number | null = null;
@@ -150,22 +136,41 @@ export class LeadManagementComponent {
   }
 
   cancelEdit(): void {
-    if (this.editingRowIndex !== null && this.originalDataItem) {
-      this.gridData.data[this.editingRowIndex] = { ...this.originalDataItem };
+    if (this.editingRowIndex !== null) {
+      const tempRow = this.gridData.data[this.editingRowIndex];
+
+      if (!tempRow.recordId) {
+        const gridCopy = [...this.gridData.data];
+        gridCopy.splice(this.editingRowIndex, 1);
+        this.gridData = {
+          data: gridCopy,
+          total: this.allData.length,
+        };
+      } else if (this.originalDataItem) {
+        this.gridData.data[this.editingRowIndex] = { ...this.originalDataItem };
+      }
     }
+
     this.editingRowIndex = null;
     this.originalDataItem = null;
   }
 
   updateRow(rowIndex: number): void {
     const updatedItem = this.gridData.data[rowIndex];
-    const globalIndex = this.skip + rowIndex;
-    this.allData[globalIndex] = { ...updatedItem };
+
+    if (!updatedItem.recordId) {
+      updatedItem.recordId = this.allData.length + 1;
+      this.allData.unshift(updatedItem);
+    } else {
+      const globalIndex = this.skip + rowIndex;
+      this.allData[globalIndex] = { ...updatedItem };
+    }
+
+    this.updateGridData();
     this.editingRowIndex = null;
     this.originalDataItem = null;
   }
 
-  // ✅ Missing method added here
   private updateGridData(): void {
     this.gridData = {
       data: this.allData.slice(this.skip, this.skip + this.pageSize),
