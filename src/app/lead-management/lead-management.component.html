@@ -295,6 +295,31 @@
         </ng-template>
       </ng-template>
     </kendo-grid-column>
+
+    <kendo-grid-column
+      field="syncToMobile"
+      title="Sync to Mobile"
+      [width]="150"
+    >
+      <!-- Header Checkbox -->
+      <ng-template kendoGridHeaderTemplate>
+        <input
+          type="checkbox"
+          class="form-check-input"
+          [checked]="allSyncSelected"
+          (change)="toggleSyncSelectAll($event)"
+        />
+      </ng-template>
+
+      <!-- Row Checkboxes -->
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <input
+          type="checkbox"
+          class="form-check-input"
+          [(ngModel)]="dataItem.syncToMobile"
+        />
+      </ng-template>
+    </kendo-grid-column>
     <kendo-grid-column
       field="bookingAgency"
       title="Booking Agency"

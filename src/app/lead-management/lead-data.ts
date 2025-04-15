@@ -19,6 +19,7 @@ export const LEAD_DATA = [
     department: 'Sales',
     region: 'North',
     comments: 'No comments',
+    syncToMobile: false,
   },
   {
     actions: 'Actions',
@@ -38,6 +39,7 @@ export const LEAD_DATA = [
     department: 'Support',
     region: 'South',
     comments: 'Follow-up required',
+    syncToMobile: false,
   },
   {
     actions: 'Actions',
@@ -57,6 +59,7 @@ export const LEAD_DATA = [
     department: 'Marketing',
     region: 'East',
     comments: 'Pending approval',
+    syncToMobile: true,
   },
   {
     actions: 'Actions',
@@ -76,6 +79,7 @@ export const LEAD_DATA = [
     department: 'Sales',
     region: 'North',
     comments: 'No comments',
+    syncToMobile: true,
   },
   {
     actions: 'Actions',
@@ -95,6 +99,7 @@ export const LEAD_DATA = [
     department: 'Marketing',
     region: 'West',
     comments: 'Follow-up needed',
+    syncToMobile: false,
   },
   {
     actions: 'Actions',
@@ -114,6 +119,7 @@ export const LEAD_DATA = [
     department: 'Support',
     region: 'East',
     comments: 'Closed successfully',
+    syncToMobile: true,
   },
   {
     actions: 'Actions',
@@ -133,6 +139,7 @@ export const LEAD_DATA = [
     department: 'HR',
     region: 'South',
     comments: '',
+    syncToMobile: false,
   },
   {
     actions: 'Actions',
@@ -152,6 +159,7 @@ export const LEAD_DATA = [
     department: 'Engineering',
     region: 'North',
     comments: 'Lead not responsive',
+    syncToMobile: true,
   },
   {
     actions: 'Actions',
@@ -171,6 +179,7 @@ export const LEAD_DATA = [
     department: 'IT',
     region: 'East',
     comments: 'Ready to proceed',
+    syncToMobile: false,
   },
   {
     actions: 'Actions',
@@ -190,6 +199,7 @@ export const LEAD_DATA = [
     department: 'Operations',
     region: 'West',
     comments: 'Great lead, but closed',
+    syncToMobile: false,
   },
   {
     actions: 'Actions',
@@ -209,6 +219,7 @@ export const LEAD_DATA = [
     department: 'Design',
     region: 'South',
     comments: '',
+    syncToMobile: false,
   },
   {
     actions: 'Actions',
@@ -228,6 +239,7 @@ export const LEAD_DATA = [
     department: 'Security',
     region: 'Central',
     comments: 'Follow up urgently',
+    syncToMobile: false,
   },
   {
     actions: 'Actions',
@@ -247,6 +259,7 @@ export const LEAD_DATA = [
     department: 'R&D',
     region: 'Global',
     comments: 'Wants AI integration',
+    syncToMobile: false,
   },
 
   {
@@ -267,6 +280,7 @@ export const LEAD_DATA = [
     department: 'Athletics',
     region: 'Midwest',
     comments: 'Interested in training tools',
+    syncToMobile: false,
   },
   {
     actions: 'Actions',
@@ -286,6 +300,7 @@ export const LEAD_DATA = [
     department: 'Sales',
     region: 'West',
     comments: 'Requested product demo',
+    syncToMobile: false,
   },
   {
     actions: 'Actions',
@@ -305,6 +320,7 @@ export const LEAD_DATA = [
     department: 'Marketing',
     region: 'Europe',
     comments: 'Requested callback',
+    syncToMobile: false,
   },
   {
     actions: 'Actions',
@@ -324,6 +340,7 @@ export const LEAD_DATA = [
     department: 'Education',
     region: 'UK',
     comments: 'Magic solutions requested',
+    syncToMobile: false,
   },
   {
     actions: 'Actions',
@@ -343,6 +360,7 @@ export const LEAD_DATA = [
     department: 'Security',
     region: 'International',
     comments: 'Needs secure tech',
+    syncToMobile: false,
   },
   {
     actions: 'Actions',
@@ -362,6 +380,7 @@ export const LEAD_DATA = [
     department: 'Culinary',
     region: 'South',
     comments: 'Didn’t respond',
+    syncToMobile: false,
   },
   {
     actions: 'Actions',
@@ -381,6 +400,7 @@ export const LEAD_DATA = [
     department: 'Leadership',
     region: 'North',
     comments: 'Waiting for final word',
+    syncToMobile: false,
   },
   {
     actions: 'Actions',
@@ -400,6 +420,7 @@ export const LEAD_DATA = [
     department: 'Strategy',
     region: 'East',
     comments: 'Very demanding lead',
+    syncToMobile: false,
   },
   {
     actions: 'Actions',
@@ -419,6 +440,7 @@ export const LEAD_DATA = [
     department: 'Education',
     region: 'UK',
     comments: 'Closed after discussion',
+    syncToMobile: false,
   },
   {
     actions: 'Actions',

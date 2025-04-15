@@ -43,6 +43,18 @@ export class LeadManagementComponent {
     }
   }
 
+  allSyncSelected: boolean = false; // Track the "Select All" checkbox state for Sync to Mobile
+
+  // Toggle "Select All" for Sync to Mobile
+  toggleSyncSelectAll(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.allSyncSelected = input.checked;
+
+    const data = (this.gridData as GridDataResult).data;
+
+    data.forEach((item: any) => (item.syncToMobile = this.allSyncSelected));
+  }
+
   allLeadsOptions = [
     { text: 'Lead 1', value: 'Lead 1' },
     { text: 'Lead 2', value: 'Lead 2' },
