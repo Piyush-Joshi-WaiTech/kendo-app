@@ -43,7 +43,7 @@ export class LeadManagementComponent {
     this.activeToggle = option;
   }
 
-  private allData = LEAD_DATA; //All data stored on file lead-data.ts
+  private allData = LEAD_DATA;
 
   public gridData: GridDataResult = {
     data: this.allData.slice(0, 10),
@@ -56,10 +56,7 @@ export class LeadManagementComponent {
   public pageChange(event: PageChangeEvent): void {
     this.skip = event.skip;
     this.pageSize = event.take;
-    this.gridData = {
-      data: this.allData.slice(this.skip, this.skip + this.pageSize),
-      total: this.allData.length,
-    };
+    this.updateGridData();
   }
 
   public selectedRows: Set<number> = new Set<number>();
@@ -113,7 +110,7 @@ export class LeadManagementComponent {
       (item) => item.recordId === dataItem.recordId
     );
     if (recordIndex !== -1) {
-      const updatedRecord = { ...dataItem, lastName: 'Updated Last Name' }; // Example update
+      const updatedRecord = { ...dataItem, lastName: 'Updated Last Name' };
       this.allData[recordIndex] = updatedRecord;
       this.updateGridData();
     }
@@ -143,27 +140,36 @@ export class LeadManagementComponent {
     this.updateGridData();
   }
 
-  // Edit an existing row
-  public editRow(rowIndex: number): void {
+  editingRowIndex: number | null = null;
+  originalDataItem: any = null;
+
+  editRow(rowIndex: number): void {
     this.editingRowIndex = rowIndex;
+    const editingItem = this.gridData.data[rowIndex];
+    this.originalDataItem = JSON.parse(JSON.stringify(editingItem));
   }
 
-  public updateRow(rowIndex: number): void {
+  cancelEdit(): void {
+    if (this.editingRowIndex !== null && this.originalDataItem) {
+      this.gridData.data[this.editingRowIndex] = { ...this.originalDataItem };
+    }
     this.editingRowIndex = null;
-    this.updateGridData();
+    this.originalDataItem = null;
   }
 
-  public cancelEdit(): void {
+  updateRow(rowIndex: number): void {
+    const updatedItem = this.gridData.data[rowIndex];
+    const globalIndex = this.skip + rowIndex;
+    this.allData[globalIndex] = { ...updatedItem };
     this.editingRowIndex = null;
+    this.originalDataItem = null;
   }
 
+  // ✅ Missing method added here
   private updateGridData(): void {
     this.gridData = {
       data: this.allData.slice(this.skip, this.skip + this.pageSize),
       total: this.allData.length,
     };
   }
-
-  public editingRowIndex: number | null = null;
-  public newRow: any = {};
 }
