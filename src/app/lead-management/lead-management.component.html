@@ -201,7 +201,7 @@
     class="kendo-grid"
   >
     <!-- Checkbox Column with custom header -->
-    <kendo-grid-column [width]="50" [columnMenu]="false">
+    <kendo-grid-column [width]="50" [columnMenu]="false" [sticky]="true">
       <!-- Header Checkbox -->
       <ng-template kendoGridHeaderTemplate>
         <input
@@ -224,7 +224,12 @@
     </kendo-grid-column>
 
     <!-- Other Columns -->
-    <kendo-grid-column field="actions" title="Actions" [width]="150">
+    <kendo-grid-column
+      field="actions"
+      title="Actions"
+      [width]="150"
+      [sticky]="true"
+    >
       <ng-template kendoGridCellTemplate let-dataItem>
         <button class="custom-btn d-flex align-items-center">
           <i class="bi bi-gear me-1"></i>
@@ -293,7 +298,7 @@
         </ng-template>
       </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column field="phoneType" title="phoneType" [width]="150">
+    <kendo-grid-column field="phoneType" title="Phone Type" [width]="150">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
         <ng-container *ngIf="editingRowIndex === rowIndex; else viewTemplate">
           <input
@@ -321,41 +326,6 @@
         </ng-template>
       </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column title="Add/Edit" [width]="150" [sticky]="true">
-      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-        <div class="add-edit-column">
-          <!-- ✅ Add this wrapper div -->
-          <div *ngIf="editingRowIndex !== rowIndex; else editTemplate">
-            <button
-              class="btn btn-primary me-2"
-              (click)="editRow(rowIndex)"
-              title="Edit"
-            >
-              Edit
-            </button>
-            <button class="btn btn-success" (click)="addRow()" title="Add">
-              Add
-            </button>
-          </div>
-          <ng-template #editTemplate>
-            <button
-              class="btn btn-success me-2"
-              (click)="updateRow(rowIndex)"
-              title="Update"
-            >
-              Update
-            </button>
-            <button
-              class="btn btn-secondary"
-              (click)="cancelEdit()"
-              title="Cancel"
-            >
-              Cancel
-            </button>
-          </ng-template>
-        </div>
-      </ng-template>
-    </kendo-grid-column>
 
     <kendo-grid-column
       field="appointmentType"
@@ -379,7 +349,7 @@
     <kendo-grid-column
       field="syncToMobile"
       title="Sync to Mobile"
-      [width]="150"
+      [width]="125"
     >
       <!-- Header Name -->
       <ng-template kendoGridHeaderTemplate> Sync to Mobile </ng-template>
@@ -524,6 +494,40 @@
         <ng-template #viewTemplate>
           {{ dataItem.comments }}
         </ng-template>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column title="Add/Edit" [width]="150" [sticky]="true">
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <div class="add-edit-column">
+          <div *ngIf="editingRowIndex !== rowIndex; else editTemplate">
+            <button
+              class="btn btn-primary me-2"
+              (click)="editRow(rowIndex)"
+              title="Edit"
+            >
+              Edit
+            </button>
+            <button class="btn btn-success" (click)="addRow()" title="Add">
+              Add
+            </button>
+          </div>
+          <ng-template #editTemplate>
+            <button
+              class="btn btn-success me-2"
+              (click)="updateRow(rowIndex)"
+              title="Update"
+            >
+              Update
+            </button>
+            <button
+              class="btn btn-secondary"
+              (click)="cancelEdit()"
+              title="Cancel"
+            >
+              Cancel
+            </button>
+          </ng-template>
+        </div>
       </ng-template>
     </kendo-grid-column>
   </kendo-grid>
