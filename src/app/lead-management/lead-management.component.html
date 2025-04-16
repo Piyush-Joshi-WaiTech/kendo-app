@@ -188,6 +188,9 @@
     [data]="gridData"
     [height]="520"
     [sortable]="true"
+    [sort]="gridState.sort"
+    [skip]="gridState.skip"
+    [pageSize]="gridState.take"
     [pageable]="{ buttonCount: 5, pageSizes: [5, 10, 20, 50, 100], info: true }"
     [filterable]="false"
     [resizable]="true"
@@ -199,9 +202,10 @@
     [rowClass]="rowClass"
     scrollable="scrollable"
     class="kendo-grid"
+    (dataStateChange)="onDataStateChange($event)"
   >
     <!-- Checkbox Column with custom header -->
-    <kendo-grid-column [width]="50" [columnMenu]="false" [sticky]="true">
+    <kendo-grid-column [width]="50" [columnMenu]="false">
       <!-- Header Checkbox -->
       <ng-template kendoGridHeaderTemplate>
         <input
@@ -224,12 +228,7 @@
     </kendo-grid-column>
 
     <!-- Other Columns -->
-    <kendo-grid-column
-      field="actions"
-      title="Actions"
-      [width]="150"
-      [sticky]="true"
-    >
+    <kendo-grid-column field="actions" title="Actions" [width]="150">
       <ng-template kendoGridCellTemplate let-dataItem>
         <button class="custom-btn d-flex align-items-center">
           <i class="bi bi-gear me-1"></i>

@@ -1,10 +1,7 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
-import { process, State, DataResult } from '@progress/kendo-data-query';
-import { DataStateChangeEvent } from '@progress/kendo-angular-grid';
-
 import { LEAD_DATA } from './lead-data';
 import {
   GridModule,
@@ -19,6 +16,8 @@ import {
   ExcelExportData,
   WorkbookOptions,
 } from '@progress/kendo-angular-excel-export';
+import { LeadManagementService } from './lead-management.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-lead-management',
@@ -31,11 +30,25 @@ import {
     DropDownsModule,
     GridModule,
     ExcelExportModule,
+    HttpClientModule, // Ensure HttpClientModule is imported here
   ],
 })
-export class LeadManagementComponent {
+export class LeadManagementComponent implements OnInit {
+  constructor(private leadService: LeadManagementService) {}
+
   @ViewChild('excelExport', { static: false })
   excelExport!: ExcelExportComponent;
+
+  ngOnInit(): void {
+    this.loadLeads();
+  }
+
+  loadLeads(): void {
+    this.leadService.getLeads().subscribe((data: any[]) => {
+      this.allData = data;
+      this.updateGridData();
+    });
+  }
 
   public exportToExcel(): void {
     this.excelExport.save();
@@ -126,9 +139,12 @@ export class LeadManagementComponent {
   };
 
   public deletePreference(preference: any): void {
-    this.savedPreferencesOptions = this.savedPreferencesOptions.filter(
-      (item) => item.value !== preference.value
-    );
+    this.leadService.deleteLead(preference.recordId).subscribe(() => {
+      this.allData = this.allData.filter(
+        (item) => item.recordId !== preference.recordId
+      );
+      this.updateGridData();
+    });
   }
 
   public addRecord(): void {
@@ -174,7 +190,30 @@ export class LeadManagementComponent {
   }
 
   public addRow(): void {
-    this.addRecord();
+    const newLead = {
+      recordId: null,
+      lastName: '',
+      firstName: '',
+      email: '',
+      phoneType: '',
+      leadId: '',
+      appointmentType: '',
+      bookingAgency: '',
+      status: '',
+      priority: '',
+      createdDate: new Date(),
+      updatedDate: new Date(),
+      assignedTo: '',
+      department: '',
+      region: '',
+      comments: '',
+      syncToMobile: false,
+    };
+
+    this.leadService.addLead(newLead).subscribe((lead) => {
+      this.allData.unshift(lead);
+      this.updateGridData();
+    });
   }
 
   editingRowIndex: number | null = null;
@@ -207,39 +246,19 @@ export class LeadManagementComponent {
   }
 
   updateRow(rowIndex: number): void {
-    const updatedItem = this.gridData.data[rowIndex];
-
-    if (!updatedItem.recordId) {
-      updatedItem.recordId = this.allData.length + 1;
-      this.allData.unshift(updatedItem);
-    } else {
-      const globalIndex = this.skip + rowIndex;
-      this.allData[globalIndex] = { ...updatedItem };
-    }
-
-    this.updateGridData();
-    this.editingRowIndex = null;
-    this.originalDataItem = null;
+    const updatedLead = this.gridData.data[rowIndex];
+    this.leadService
+      .updateLead(updatedLead.recordId, updatedLead)
+      .subscribe(() => {
+        this.updateGridData();
+        this.editingRowIndex = null;
+      });
   }
 
   private updateGridData(): void {
-    this.gridData = process(this.allData, this.gridState);
     this.gridData = {
       data: this.allData.slice(this.skip, this.skip + this.pageSize),
       total: this.allData.length,
     };
-  }
-  public gridState: State = {
-    sort: [],
-    skip: this.skip,
-    take: this.pageSize,
-  };
-
-  public onDataStateChange(state: DataStateChangeEvent): void {
-    this.gridState = state;
-    this.skip = state.skip ?? 0;
-    this.pageSize = state.take ?? 10;
-
-    this.gridData = process(this.allData, this.gridState);
   }
 }
