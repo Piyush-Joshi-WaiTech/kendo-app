@@ -2,7 +2,11 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
+import { process, State, DataResult } from '@progress/kendo-data-query';
+import { DataStateChangeEvent } from '@progress/kendo-angular-grid';
+
 import { LEAD_DATA } from './lead-data';
+import { DataStateChangeEvent } from '@progress/kendo-angular-grid';
 import {
   GridModule,
   GridDataResult,
@@ -260,5 +264,19 @@ export class LeadManagementComponent implements OnInit {
       data: this.allData.slice(this.skip, this.skip + this.pageSize),
       total: this.allData.length,
     };
+  }
+
+  public gridState: State = {
+    sort: [],
+    skip: this.skip,
+    take: this.pageSize,
+  };
+
+  public onDataStateChange(state: DataStateChangeEvent): void {
+    this.gridState = state;
+    this.skip = state.skip ?? 0;
+    this.pageSize = state.take ?? 10;
+
+    this.gridData = process(this.allData, this.gridState);
   }
 }

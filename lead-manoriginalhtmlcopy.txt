@@ -92,7 +92,7 @@
         title="Comments"
       ></kendo-excelexport-column>
     </kendo-excelexport>
-    <button class="custom-btn" (click)="addRecord()">Create</button>
+    <button class="custom-btn">Create</button>
   </div>
 </div>
 
@@ -270,7 +270,7 @@
         <ng-container *ngIf="editingRowIndex === rowIndex; else viewTemplate">
           <input
             [(ngModel)]="dataItem.firstName"
-            class="form-control form-control-sm k-text-box"
+            class="form-control form-control-sm"
             style="width: 100%"
           />
         </ng-container>
@@ -495,63 +495,36 @@
         </ng-template>
       </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column title="Edit" [width]="150" [sticky]="true">
+    <kendo-grid-column title="Add/Edit" [width]="150" [sticky]="true">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
         <div class="add-edit-column">
-          <div
-            *ngIf="
-              editingRowIndex !== rowIndex || !dataItem.recordId;
-              else editTemplate
-            "
-          >
+          <div *ngIf="editingRowIndex !== rowIndex; else editTemplate">
             <button
-              class="btn btn-primary"
+              class="btn btn-primary me-2"
               (click)="editRow(rowIndex)"
               title="Edit"
-              [disabled]="editingRowIndex !== null"
             >
               Edit
             </button>
-            <!-- <button
-              class="btn btn-success"
-              (click)="addRecord()"
-              title="Add"
-              [disabled]="editingRowIndex !== null"
-            >
+            <button class="btn btn-success" (click)="addRow()" title="Add">
               Add
-            </button> -->
-            <button
-              class="btn btn-light btn-sm me-2 p-2"
-              (click)="deleteRecord(dataItem)"
-              title="Delete"
-              style="border: none"
-            >
-              <i
-                class="fas fa-trash-alt text-danger ms-5"
-                style="font-size: 16px"
-              ></i>
             </button>
           </div>
           <ng-template #editTemplate>
-            <div class="d-flex gap-2">
-              <button
-                class="btn btn-success d-flex align-items-center gap-1"
-                (click)="updateRow(rowIndex)"
-                title="Update"
-              >
-                <i class="bi bi-check-circle"></i>
-                Update
-              </button>
-
-              <button
-                class="btn btn-secondary d-flex align-items-center gap-1"
-                (click)="cancelEdit()"
-                title="Cancel"
-              >
-                <i class="bi bi-x-circle"></i>
-                Cancel
-              </button>
-            </div>
+            <button
+              class="btn btn-success me-2"
+              (click)="updateRow(rowIndex)"
+              title="Update"
+            >
+              Update
+            </button>
+            <button
+              class="btn btn-secondary"
+              (click)="cancelEdit()"
+              title="Cancel"
+            >
+              Cancel
+            </button>
           </ng-template>
         </div>
       </ng-template>

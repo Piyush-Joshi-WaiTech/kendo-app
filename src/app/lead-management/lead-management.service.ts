@@ -17,7 +17,7 @@ export class LeadManagementService {
 
   // Add a new lead
   addLead(lead: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, lead);
+    return this.http.post<any>('http://localhost:3000/leads', lead);
   }
 
   // Update an existing lead
@@ -27,6 +27,7 @@ export class LeadManagementService {
 
   // Delete a lead
   deleteLead(id: number): Observable<any> {
+    console.log(`Attempting to delete lead with ID: ${id}`); // Debug log
     return this.http.delete<any>(`${this.apiUrl}/${id}`);
   }
 }
