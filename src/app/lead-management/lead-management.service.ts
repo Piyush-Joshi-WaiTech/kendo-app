@@ -27,7 +27,9 @@ export class LeadManagementService {
 
   // Delete a lead
   deleteLead(id: number): Observable<any> {
-    console.log(`Attempting to delete lead with ID: ${id}`); // Debug log
-    return this.http.delete<any>(`${this.apiUrl}/${id}`);
+    console.log(`Attempting to delete lead with ID: ${id}`);
+    return this.http.delete<any>(`${this.apiUrl}/${id}`, {
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 }

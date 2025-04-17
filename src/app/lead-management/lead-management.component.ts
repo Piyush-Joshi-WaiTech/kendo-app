@@ -119,7 +119,7 @@ export class LeadManagementComponent implements OnInit {
     this.activeToggle = option;
   }
 
-  private allData = LEAD_DATA;
+  private allData: any[] = []; // ✅ Don't use LEAD_DATA
 
   public gridData: GridDataResult = {
     data: this.allData.slice(0, 10),
@@ -158,7 +158,6 @@ export class LeadManagementComponent implements OnInit {
 
   public addRecord(): void {
     const newRecord = {
-      id: null,
       lastName: '',
       firstName: '',
       email: '',
@@ -190,7 +189,7 @@ export class LeadManagementComponent implements OnInit {
 
   public addRow(): void {
     const newLead = {
-      id: null, // Initially null, backend should assign an ID
+      // Don't include `id` at all
       lastName: '',
       firstName: '',
       email: '',
@@ -211,8 +210,8 @@ export class LeadManagementComponent implements OnInit {
 
     this.leadService.addLead(newLead).subscribe((createdLead) => {
       if (createdLead?.id != null) {
-        this.allData.unshift(createdLead); // Add the created lead to the data array
-        this.updateGridData(); // Update the grid with the new lead
+        this.allData.unshift(createdLead);
+        this.updateGridData();
       } else {
         console.warn(
           'Newly created lead did not return a valid ID:',
@@ -221,6 +220,14 @@ export class LeadManagementComponent implements OnInit {
       }
     });
   }
+
+  // // TEMPORARY ID GENERATOR
+  // private generateTempId(): number {
+  //   const maxId = this.allData.length
+  //     ? Math.max(...this.allData.map((d) => d.id || 0))
+  //     : 0;
+  //   return maxId + 1;
+  // }
 
   editingRowIndex: number | null = null;
   originalDataItem: any = null;
@@ -235,7 +242,7 @@ export class LeadManagementComponent implements OnInit {
     if (this.editingRowIndex !== null) {
       const tempRow = this.gridData.data[this.editingRowIndex];
 
-      if (!tempRow.id) {
+      if (!tempRow.id && tempRow.id !== 0) {
         const gridCopy = [...this.gridData.data];
         gridCopy.splice(this.editingRowIndex, 1);
         this.gridData = {
@@ -288,28 +295,29 @@ export class LeadManagementComponent implements OnInit {
   }
 
   public deleteRecord(dataItem: any): void {
-    if (!dataItem.id) {
-      // If the record does not have an ID, remove it directly from the grid
-      const index = this.gridData.data.indexOf(dataItem);
-      if (index !== -1) {
-        this.gridData.data.splice(index, 1);
-        this.gridData = {
-          data: [...this.gridData.data],
-          total: this.gridData.total - 1,
-        };
-      }
+    console.log('Deleting record:', dataItem);
+
+    if (dataItem.id === null || dataItem.id === undefined) {
+      // Unsaved record, just remove from grid
+      this.allData = this.allData.filter((item) => item !== dataItem);
+      this.updateGridData();
+      console.log('Removed unsaved item from grid only');
       return;
     }
 
     if (confirm('Are you sure you want to delete this lead?')) {
+      console.log('Attempting to delete ID:', dataItem.id);
       this.leadService.deleteLead(dataItem.id).subscribe(
         () => {
-          console.log('Lead deleted successfully');
+          console.log(`✅ Lead with ID ${dataItem.id} deleted from db.json`);
           this.allData = this.allData.filter((item) => item.id !== dataItem.id);
           this.updateGridData();
         },
         (error) => {
-          console.error('Error deleting lead:', error);
+          console.error(
+            `❌ Failed to delete lead with ID ${dataItem.id}`,
+            error
+          );
           alert('Failed to delete lead. Please try again.');
         }
       );
