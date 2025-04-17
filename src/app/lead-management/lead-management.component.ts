@@ -111,7 +111,7 @@ export class LeadManagementComponent implements OnInit {
 
   set searchKeyword(value: string) {
     this._searchKeyword = value;
-    this.filterGridData(); // Trigger filtering when the search keyword changes
+    this.filterGridData();
   }
 
   activeToggle: string = 'Non-Intl';
@@ -120,7 +120,7 @@ export class LeadManagementComponent implements OnInit {
     this.activeToggle = option;
   }
 
-  private allData: any[] = []; // ✅ Don't use LEAD_DATA
+  private allData: any[] = [];
 
   public gridData: GridDataResult = {
     data: this.allData.slice(0, 10),
@@ -190,7 +190,6 @@ export class LeadManagementComponent implements OnInit {
 
   public addRow(): void {
     const newLead = {
-      // Don't include `id` at all
       lastName: '',
       firstName: '',
       email: '',
@@ -223,7 +222,7 @@ export class LeadManagementComponent implements OnInit {
   }
   formatDate(date: any): string {
     const d = new Date(date);
-    return d.toISOString().split('T')[0]; // "yyyy-MM-dd"
+    return d.toISOString().split('T')[0];
   }
 
   // // TEMPORARY ID GENERATOR
@@ -274,21 +273,37 @@ export class LeadManagementComponent implements OnInit {
         this.allData[0] = createdLead;
         this.updateGridData();
         this.editingRowIndex = null;
+
+        // ✅ SweetAlert success for adding a new lead
+        Swal.fire({
+          icon: 'success',
+          title: 'Lead Added',
+          text: 'The new lead has been successfully created!',
+          timer: 2000,
+          showConfirmButton: false,
+        });
       });
     } else {
       // Update existing
-      this.leadService
-        .updateLead(updatedLead.id, updatedLead) // ✅ Use 'id' here
-        .subscribe(() => {
-          const index = this.allData.findIndex(
-            (item) => item.id === updatedLead.id // ✅ Use 'id' here
-          );
-          if (index !== -1) {
-            this.allData[index] = updatedLead;
-            this.updateGridData();
-          }
-          this.editingRowIndex = null;
+      this.leadService.updateLead(updatedLead.id, updatedLead).subscribe(() => {
+        const index = this.allData.findIndex(
+          (item) => item.id === updatedLead.id
+        );
+        if (index !== -1) {
+          this.allData[index] = updatedLead;
+          this.updateGridData();
+        }
+        this.editingRowIndex = null;
+
+        // ✅ SweetAlert success for updating an existing lead
+        Swal.fire({
+          icon: 'success',
+          title: 'Lead Updated',
+          text: 'Changes have been saved successfully!',
+          timer: 2000,
+          showConfirmButton: false,
         });
+      });
     }
   }
 
