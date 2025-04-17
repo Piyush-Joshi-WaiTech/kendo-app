@@ -92,7 +92,12 @@
         title="Comments"
       ></kendo-excelexport-column>
     </kendo-excelexport>
-    <button class="custom-btn" (click)="addRecord()">Create</button>
+    <button
+      class="custom-btn"
+      (click)="editingRowIndex === null ? addRecord() : cancelEdit()"
+    >
+      {{ editingRowIndex === null ? "Create" : "Cancel" }}
+    </button>
   </div>
 </div>
 
