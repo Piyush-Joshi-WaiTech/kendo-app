@@ -440,6 +440,16 @@
   margin-right: 0.5rem;
 }
 
+/* Add spacing between Update and Cancel buttons */
+button.btn-success + button.btn-secondary {
+  margin-top: 10px; /* Adjust the spacing as needed */
+}
+
+/* Add spacing between Edit and Delete buttons */
+.add-edit-column button.btn-primary + button.btn-light {
+  margin-left: 21px; /* Adjust the spacing as needed */
+}
+
 /* Dark Mode Grid Styles */
 body.dark-mode .kendo-grid {
   border: 1px solid #8bc34a; /* Green border */
@@ -502,6 +512,11 @@ body.dark-mode .kendo-dropdown.saved-pref-dropdown .k-input {
 body.dark-mode .kendo-dropdown.all-leads-dropdown .k-input::placeholder,
 body.dark-mode .kendo-dropdown.saved-pref-dropdown .k-input::placeholder {
   color: white; /* White placeholder text */
+}
+
+/* Add spacing between Update and Cancel buttons */
+.add-edit-column .d-flex.gap-2 {
+  gap: 10px; /* Adjust the spacing as needed */
 }
 
 /* Responsive styles */
