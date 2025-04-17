@@ -221,6 +221,10 @@ export class LeadManagementComponent implements OnInit {
       }
     });
   }
+  formatDate(date: any): string {
+    const d = new Date(date);
+    return d.toISOString().split('T')[0]; // "yyyy-MM-dd"
+  }
 
   // // TEMPORARY ID GENERATOR
   // private generateTempId(): number {
@@ -236,7 +240,9 @@ export class LeadManagementComponent implements OnInit {
   editRow(rowIndex: number): void {
     this.editingRowIndex = rowIndex;
     const editingItem = this.gridData.data[rowIndex];
-    this.originalDataItem = JSON.parse(JSON.stringify(editingItem));
+    if (editingItem) {
+      this.originalDataItem = JSON.parse(JSON.stringify(editingItem));
+    }
   }
 
   cancelEdit(): void {
