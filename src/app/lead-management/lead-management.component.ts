@@ -22,6 +22,7 @@ import {
 } from '@progress/kendo-angular-excel-export';
 import { LeadManagementService } from './lead-management.service';
 import { HttpClientModule } from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-lead-management',
@@ -305,23 +306,43 @@ export class LeadManagementComponent implements OnInit {
       return;
     }
 
-    if (confirm('Are you sure you want to delete this lead?')) {
-      console.log('Attempting to delete ID:', dataItem.id);
-      this.leadService.deleteLead(dataItem.id).subscribe(
-        () => {
-          console.log(`✅ Lead with ID ${dataItem.id} deleted from db.json`);
-          this.allData = this.allData.filter((item) => item.id !== dataItem.id);
-          this.updateGridData();
-        },
-        (error) => {
-          console.error(
-            `❌ Failed to delete lead with ID ${dataItem.id}`,
-            error
-          );
-          alert('Failed to delete lead. Please try again.');
-        }
-      );
-    }
+    // SweetAlert confirmation dialog
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you really want to delete this lead?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.leadService.deleteLead(dataItem.id).subscribe(
+          () => {
+            console.log(`✅ Lead with ID ${dataItem.id} deleted from db.json`);
+            this.allData = this.allData.filter(
+              (item) => item.id !== dataItem.id
+            );
+            this.updateGridData();
+
+            // Success alert
+            Swal.fire('Deleted!', 'The lead has been deleted.', 'success');
+          },
+          (error) => {
+            console.error(
+              `❌ Failed to delete lead with ID ${dataItem.id}`,
+              error
+            );
+            // Error alert
+            Swal.fire(
+              'Error',
+              'Failed to delete the lead. Please try again.',
+              'error'
+            );
+          }
+        );
+      }
+    });
   }
 
   private updateGridData(): void {
