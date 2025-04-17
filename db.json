@@ -1000,26 +1000,6 @@
       "comments": "fd",
       "syncToMobile": false,
       "recordId": "2323"
-    },
-    {
-      "id": null,
-      "lastName": "xcbcb",
-      "firstName": "cv",
-      "email": "",
-      "phoneType": "",
-      "leadId": "",
-      "appointmentType": "",
-      "bookingAgency": "",
-      "status": "",
-      "priority": "",
-      "createdDate": "2025-04-16T13:37:17.982Z",
-      "updatedDate": "2025-04-16T13:37:17.982Z",
-      "assignedTo": "",
-      "department": "",
-      "region": "",
-      "comments": "",
-      "syncToMobile": false,
-      "recordId": "11111"
     }
   ]
 }

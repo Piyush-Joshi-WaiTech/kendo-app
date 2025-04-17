@@ -102,7 +102,17 @@ export class LeadManagementComponent implements OnInit {
   selectedLeadValue: string | null = this.defaultLead.value;
   selectedPreferenceValue: string | null = this.defaultPreference.value;
 
-  searchKeyword = '';
+  private _searchKeyword: string = '';
+
+  get searchKeyword(): string {
+    return this._searchKeyword;
+  }
+
+  set searchKeyword(value: string) {
+    this._searchKeyword = value;
+    this.filterGridData(); // Trigger filtering when the search keyword changes
+  }
+
   activeToggle: string = 'Non-Intl';
 
   setActiveToggle(option: string): void {
@@ -279,8 +289,15 @@ export class LeadManagementComponent implements OnInit {
 
   public deleteRecord(dataItem: any): void {
     if (!dataItem.id) {
-      console.error('Invalid lead ID for deletion:', dataItem);
-      alert('Invalid lead ID. Please try again.');
+      // If the record does not have an ID, remove it directly from the grid
+      const index = this.gridData.data.indexOf(dataItem);
+      if (index !== -1) {
+        this.gridData.data.splice(index, 1);
+        this.gridData = {
+          data: [...this.gridData.data],
+          total: this.gridData.total - 1,
+        };
+      }
       return;
     }
 
@@ -303,6 +320,36 @@ export class LeadManagementComponent implements OnInit {
     this.gridData = {
       data: this.allData.slice(this.skip, this.skip + this.pageSize),
       total: this.allData.length,
+    };
+  }
+
+  filterGridData(): void {
+    const keyword = this.searchKeyword.toLowerCase();
+
+    // Filter the data based on the search keyword
+    const filteredData = this.allData.filter((item) => {
+      return (
+        item.recordId?.toString().toLowerCase().includes(keyword) ||
+        item.lastName?.toLowerCase().includes(keyword) ||
+        item.firstName?.toLowerCase().includes(keyword) ||
+        item.email?.toLowerCase().includes(keyword) ||
+        item.phoneType?.toLowerCase().includes(keyword) ||
+        item.leadId?.toString().toLowerCase().includes(keyword) ||
+        item.appointmentType?.toLowerCase().includes(keyword) ||
+        item.bookingAgency?.toString().toLowerCase().includes(keyword) ||
+        item.status?.toLowerCase().includes(keyword) ||
+        item.priority?.toLowerCase().includes(keyword) ||
+        item.assignedTo?.toLowerCase().includes(keyword) ||
+        item.department?.toLowerCase().includes(keyword) ||
+        item.region?.toLowerCase().includes(keyword) ||
+        item.comments?.toLowerCase().includes(keyword)
+      );
+    });
+
+    // Update the grid data with the filtered data
+    this.gridData = {
+      data: filteredData.slice(this.skip, this.skip + this.pageSize),
+      total: filteredData.length,
     };
   }
 
