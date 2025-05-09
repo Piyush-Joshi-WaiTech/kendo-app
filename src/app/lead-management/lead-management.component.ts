@@ -159,6 +159,7 @@ export class LeadManagementComponent implements OnInit {
 
   public addRecord(): void {
     const newRecord = {
+      recordId: '',
       lastName: '',
       firstName: '',
       email: '',
@@ -175,17 +176,25 @@ export class LeadManagementComponent implements OnInit {
       region: '',
       comments: '',
       syncToMobile: false,
+
     };
 
-    this.editingRowIndex = 0;
+    // Add the new record to the grid data
     const gridCopy = [...this.gridData.data];
     gridCopy.unshift(newRecord);
     this.gridData = {
       data: gridCopy,
-      total: this.allData.length,
+      total: this.allData.length + 1,
     };
 
+    // Set the new record as the one being edited
+    this.editingRowIndex = 0;
     this.originalDataItem = JSON.parse(JSON.stringify(newRecord));
+
+    // Enable editing for all fields of the new record
+    this.editingField = { rowIndex: 0, field: 'recordId' };
+
+
   }
 
   public addRow(): void {
@@ -415,5 +424,64 @@ export class LeadManagementComponent implements OnInit {
     this.pageSize = state.take ?? 10;
 
     this.gridData = process(this.allData, this.gridState);
+  }
+
+  // Add a property to track the currently edited field
+  public editingField: { rowIndex: number; field: string | null } | null = null;
+
+  // Method to enable editing for a specific field
+  public enableFieldEdit(rowIndex: number, field: string): void {
+    this.editingField = { rowIndex, field };
+  }
+
+  // Method to save the edited field
+  public saveFieldEdit(rowIndex: number, field: string, value: any): void {
+    const updatedLead = { ...this.gridData.data[rowIndex], [field]: value };
+
+    if (!updatedLead.id) {
+      // Save new lead to the server
+      this.leadService.addLead(updatedLead).subscribe((createdLead) => {
+        if (createdLead?.id != null) {
+          this.allData[0] = createdLead;
+          this.updateGridData();
+          this.editingField = null; // Exit edit mode
+
+          // SweetAlert success for adding a new lead
+          Swal.fire({
+            icon: 'success',
+            title: 'Lead Added',
+            text: 'The new lead has been successfully created!',
+            timer: 2000,
+            showConfirmButton: false,
+          });
+        } else {
+          console.warn('Newly created lead did not return a valid ID:', createdLead);
+        }
+      });
+    } else {
+      // Update existing lead
+      this.leadService.updateLead(updatedLead.id, updatedLead).subscribe(() => {
+        const index = this.allData.findIndex((item) => item.id === updatedLead.id);
+        if (index !== -1) {
+          this.allData[index] = updatedLead;
+          this.updateGridData();
+        }
+        this.editingField = null; // Exit edit mode
+
+        // SweetAlert success for updating a field
+        Swal.fire({
+          icon: 'success',
+          title: 'Field Updated',
+          text: 'The field has been successfully updated!',
+          timer: 2000,
+          showConfirmButton: false,
+        });
+      });
+    }
+  }
+
+  // Method to cancel field editing
+  public cancelFieldEdit(): void {
+    this.editingField = null;
   }
 }
