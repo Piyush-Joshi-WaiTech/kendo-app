@@ -537,8 +537,12 @@ export class LeadManagementComponent implements OnInit, AfterViewInit {
     }
 
     const columnOrder = this.grid.columns
-      .map((col: any) => col.field)
-      .filter(Boolean);
+      .map((col: any) => ({
+        field: col.field,
+        hidden: col.hidden || false,
+        width: col.width || null
+      }))
+      .filter(col => col.field); // Ensure valid fields only
 
     Swal.fire({
       title: 'Save Preference',
@@ -550,7 +554,7 @@ export class LeadManagementComponent implements OnInit, AfterViewInit {
     }).then((result) => {
       if (result.isConfirmed && result.value) {
         const preference = {
-          id: Date.now(),
+          id: Date.now().toString(16), // Generate a unique ID
           name: result.value,
           columns: columnOrder,
         };

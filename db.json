@@ -1166,361 +1166,195 @@
       ]
     },
     {
-      "id": 1746874560521,
-      "name": "save pr1",
+      "id": "196ba28e556",
+      "name": "sas",
       "columns": [
-        "actions",
-        "recordId",
-        "lastName",
-        "firstName",
-        "email",
-        "phoneType",
-        "leadId",
-        "appointmentType",
-        "syncToMobile",
-        "bookingAgency",
-        "status",
-        "priority",
-        "createdDate",
-        "updatedDate",
-        "assignedTo",
-        "department",
-        "region",
-        "comments"
+        {
+          "field": "actions",
+          "hidden": false,
+          "width": 150
+        },
+        {
+          "field": "recordId",
+          "hidden": false,
+          "width": 150
+        },
+        {
+          "field": "lastName",
+          "hidden": false,
+          "width": 150
+        },
+        {
+          "field": "firstName",
+          "hidden": false,
+          "width": 150
+        },
+        {
+          "field": "email",
+          "hidden": false,
+          "width": 150
+        },
+        {
+          "field": "phoneType",
+          "hidden": false,
+          "width": 150
+        },
+        {
+          "field": "leadId",
+          "hidden": false,
+          "width": 135
+        },
+        {
+          "field": "appointmentType",
+          "hidden": false,
+          "width": 150
+        },
+        {
+          "field": "syncToMobile",
+          "hidden": false,
+          "width": 125
+        },
+        {
+          "field": "bookingAgency",
+          "hidden": false,
+          "width": 150
+        },
+        {
+          "field": "status",
+          "hidden": false,
+          "width": 150
+        },
+        {
+          "field": "priority",
+          "hidden": false,
+          "width": 150
+        },
+        {
+          "field": "createdDate",
+          "hidden": false,
+          "width": 200
+        },
+        {
+          "field": "updatedDate",
+          "hidden": false,
+          "width": 200
+        },
+        {
+          "field": "assignedTo",
+          "hidden": false,
+          "width": 150
+        },
+        {
+          "field": "department",
+          "hidden": false,
+          "width": 150
+        },
+        {
+          "field": "region",
+          "hidden": false,
+          "width": 150
+        },
+        {
+          "field": "comments",
+          "hidden": false,
+          "width": 200
+        }
       ]
     },
     {
-      "id": 1746874565934,
-      "name": "save",
+      "id": "196ba28fae2",
+      "name": "sas2",
       "columns": [
-        "actions",
-        "recordId",
-        "lastName",
-        "firstName",
-        "email",
-        "phoneType",
-        "leadId",
-        "appointmentType",
-        "syncToMobile",
-        "bookingAgency",
-        "status",
-        "priority",
-        "createdDate",
-        "updatedDate",
-        "assignedTo",
-        "department",
-        "region",
-        "comments"
-      ]
-    },
-    {
-      "id": 1746874581608,
-      "name": "save pred 2",
-      "columns": [
-        "actions",
-        "recordId",
-        "lastName",
-        "firstName",
-        "email",
-        "phoneType",
-        "leadId",
-        "appointmentType",
-        "syncToMobile",
-        "bookingAgency",
-        "status",
-        "priority",
-        "createdDate",
-        "updatedDate",
-        "assignedTo",
-        "department",
-        "region",
-        "comments"
-      ]
-    },
-    {
-      "id": 1746874587873,
-      "name": "save pred 2",
-      "columns": [
-        "actions",
-        "recordId",
-        "lastName",
-        "firstName",
-        "email",
-        "phoneType",
-        "leadId",
-        "appointmentType",
-        "syncToMobile",
-        "bookingAgency",
-        "status",
-        "priority",
-        "createdDate",
-        "updatedDate",
-        "assignedTo",
-        "department",
-        "region",
-        "comments"
-      ]
-    },
-    {
-      "id": 1746875372796,
-      "name": "save  121",
-      "columns": [
-        "actions",
-        "recordId",
-        "lastName",
-        "firstName",
-        "email",
-        "phoneType",
-        "leadId",
-        "appointmentType",
-        "syncToMobile",
-        "bookingAgency",
-        "status",
-        "priority",
-        "createdDate",
-        "updatedDate",
-        "assignedTo",
-        "department",
-        "region",
-        "comments"
-      ]
-    },
-    {
-      "id": 1746875413444,
-      "name": "save pre first 1",
-      "columns": [
-        "actions",
-        "recordId",
-        "lastName",
-        "firstName",
-        "email",
-        "phoneType",
-        "leadId",
-        "appointmentType",
-        "syncToMobile",
-        "bookingAgency",
-        "status",
-        "priority",
-        "createdDate",
-        "updatedDate",
-        "assignedTo",
-        "department",
-        "region",
-        "comments"
-      ]
-    },
-    {
-      "id": 1746875452878,
-      "name": "save last 2",
-      "columns": [
-        "actions",
-        "recordId",
-        "lastName",
-        "firstName",
-        "email",
-        "phoneType",
-        "leadId",
-        "appointmentType",
-        "syncToMobile",
-        "bookingAgency",
-        "status",
-        "priority",
-        "createdDate",
-        "updatedDate",
-        "assignedTo",
-        "department",
-        "region",
-        "comments"
-      ]
-    },
-    {
-      "id": 1746875803920,
-      "name": "save 2 save",
-      "columns": [
-        "actions",
-        "recordId",
-        "lastName",
-        "firstName",
-        "email",
-        "phoneType",
-        "leadId",
-        "appointmentType",
-        "syncToMobile",
-        "bookingAgency",
-        "status",
-        "priority",
-        "createdDate",
-        "updatedDate",
-        "assignedTo",
-        "department",
-        "region",
-        "comments"
-      ]
-    },
-    {
-      "id": 1746875817848,
-      "name": "savwe",
-      "columns": [
-        "actions",
-        "recordId",
-        "lastName",
-        "firstName",
-        "email",
-        "phoneType",
-        "leadId",
-        "appointmentType",
-        "syncToMobile",
-        "bookingAgency",
-        "status",
-        "priority",
-        "createdDate",
-        "updatedDate",
-        "assignedTo",
-        "department",
-        "region",
-        "comments"
-      ]
-    },
-    {
-      "id": 1746878347811,
-      "name": "1212",
-      "columns": [
-        "actions",
-        "recordId",
-        "lastName",
-        "firstName",
-        "email",
-        "phoneType",
-        "leadId",
-        "appointmentType",
-        "syncToMobile",
-        "bookingAgency",
-        "status",
-        "priority",
-        "createdDate",
-        "updatedDate",
-        "assignedTo",
-        "department",
-        "region",
-        "comments"
-      ]
-    },
-    {
-      "id": 1746878375188,
-      "name": "sal",
-      "columns": [
-        "actions",
-        "recordId",
-        "lastName",
-        "firstName",
-        "email",
-        "phoneType",
-        "leadId",
-        "appointmentType",
-        "syncToMobile",
-        "bookingAgency",
-        "status",
-        "priority",
-        "createdDate",
-        "updatedDate",
-        "assignedTo",
-        "department",
-        "region",
-        "comments"
-      ]
-    },
-    {
-      "id": 1746878387942,
-      "name": "sal1",
-      "columns": [
-        "actions",
-        "recordId",
-        "lastName",
-        "firstName",
-        "email",
-        "phoneType",
-        "leadId",
-        "appointmentType",
-        "syncToMobile",
-        "bookingAgency",
-        "status",
-        "priority",
-        "createdDate",
-        "updatedDate",
-        "assignedTo",
-        "department",
-        "region",
-        "comments"
-      ]
-    },
-    {
-      "id": 1746879042140,
-      "name": "save primary",
-      "columns": [
-        "recordId",
-        "lastName",
-        "firstName",
-        "email",
-        "phoneType"
-      ]
-    },
-    {
-      "id": 1746879054677,
-      "name": "save record",
-      "columns": [
-        "recordId",
-        "lastName",
-        "firstName",
-        "email",
-        "phoneType"
-      ]
-    },
-    {
-      "id": 1746879106026,
-      "name": "save a",
-      "columns": [
-        "actions",
-        "recordId",
-        "lastName",
-        "firstName",
-        "email",
-        "phoneType",
-        "leadId",
-        "appointmentType",
-        "syncToMobile",
-        "bookingAgency",
-        "status",
-        "priority",
-        "createdDate",
-        "updatedDate",
-        "assignedTo",
-        "department",
-        "region",
-        "comments"
-      ]
-    },
-    {
-      "id": 1746879113283,
-      "name": "save a2",
-      "columns": [
-        "actions",
-        "recordId",
-        "lastName",
-        "firstName",
-        "email",
-        "phoneType",
-        "leadId",
-        "appointmentType",
-        "syncToMobile",
-        "bookingAgency",
-        "status",
-        "priority",
-        "createdDate",
-        "updatedDate",
-        "assignedTo",
-        "department",
-        "region",
-        "comments"
+        {
+          "field": "actions",
+          "hidden": false,
+          "width": 150
+        },
+        {
+          "field": "recordId",
+          "hidden": false,
+          "width": 150
+        },
+        {
+          "field": "lastName",
+          "hidden": false,
+          "width": 150
+        },
+        {
+          "field": "firstName",
+          "hidden": false,
+          "width": 150
+        },
+        {
+          "field": "email",
+          "hidden": false,
+          "width": 150
+        },
+        {
+          "field": "phoneType",
+          "hidden": false,
+          "width": 150
+        },
+        {
+          "field": "leadId",
+          "hidden": false,
+          "width": 135
+        },
+        {
+          "field": "appointmentType",
+          "hidden": false,
+          "width": 150
+        },
+        {
+          "field": "syncToMobile",
+          "hidden": false,
+          "width": 125
+        },
+        {
+          "field": "bookingAgency",
+          "hidden": false,
+          "width": 150
+        },
+        {
+          "field": "status",
+          "hidden": false,
+          "width": 150
+        },
+        {
+          "field": "priority",
+          "hidden": false,
+          "width": 150
+        },
+        {
+          "field": "createdDate",
+          "hidden": false,
+          "width": 200
+        },
+        {
+          "field": "updatedDate",
+          "hidden": false,
+          "width": 200
+        },
+        {
+          "field": "assignedTo",
+          "hidden": false,
+          "width": 150
+        },
+        {
+          "field": "department",
+          "hidden": false,
+          "width": 150
+        },
+        {
+          "field": "region",
+          "hidden": false,
+          "width": 150
+        },
+        {
+          "field": "comments",
+          "hidden": false,
+          "width": 200
+        }
       ]
     }
   ]
