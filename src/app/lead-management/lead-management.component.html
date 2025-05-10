@@ -243,8 +243,8 @@
     </kendo-grid-column>
     <kendo-grid-column field="recordId" title="Record Id" [width]="150">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-        <div *ngIf="editingField?.rowIndex === rowIndex && editingField?.field === 'recordId'; else viewRecordId">
-          <input [(ngModel)]="dataItem.recordId" (blur)="saveFieldEdit(rowIndex, 'recordId', dataItem.recordId)" class="form-control form-control-sm" style="width: 100%" />
+        <div *ngIf="editingField?.rowIndex === rowIndex && (editingField?.field === 'recordId' || editingField?.field === null); else viewRecordId">
+          <input [(ngModel)]="gridData.data[rowIndex].recordId" (blur)="saveFieldEdit(rowIndex, 'recordId', gridData.data[rowIndex].recordId)" class="form-control form-control-sm" style="width: 100%" />
         </div>
         <ng-template #viewRecordId>
           <span (click)="enableFieldEdit(rowIndex, 'recordId')">{{ dataItem.recordId }}</span>
@@ -254,8 +254,8 @@
 
     <kendo-grid-column field="lastName" title="Last Name" [width]="150">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-        <div *ngIf="editingField?.rowIndex === rowIndex && editingField?.field === 'lastName'; else viewLastName">
-          <input [(ngModel)]="dataItem.lastName" (blur)="saveFieldEdit(rowIndex, 'lastName', dataItem.lastName)" class="form-control form-control-sm" style="width: 100%" />
+        <div *ngIf="editingField?.rowIndex === rowIndex && (editingField?.field === 'lastName' || editingField?.field === null); else viewLastName">
+          <input [(ngModel)]="gridData.data[rowIndex].lastName" (blur)="saveFieldEdit(rowIndex, 'lastName', gridData.data[rowIndex].lastName)" class="form-control form-control-sm" style="width: 100%" />
         </div>
         <ng-template #viewLastName>
           <span (click)="enableFieldEdit(rowIndex, 'lastName')">{{ dataItem.lastName }}</span>
@@ -264,8 +264,8 @@
     </kendo-grid-column>
     <kendo-grid-column field="firstName" title="First Name" [width]="150">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-        <div *ngIf="editingField?.rowIndex === rowIndex && editingField?.field === 'firstName'; else viewFirstName">
-          <input [(ngModel)]="dataItem.firstName" (blur)="saveFieldEdit(rowIndex, 'firstName', dataItem.firstName)" class="form-control form-control-sm k-text-box" style="width: 100%" />
+        <div *ngIf="editingField?.rowIndex === rowIndex && (editingField?.field === 'firstName' || editingField?.field === null); else viewFirstName">
+          <input [(ngModel)]="gridData.data[rowIndex].firstName" (blur)="saveFieldEdit(rowIndex, 'firstName', gridData.data[rowIndex].firstName)" class="form-control form-control-sm k-text-box" style="width: 100%" />
         </div>
         <ng-template #viewFirstName>
           <span (click)="enableFieldEdit(rowIndex, 'firstName')">{{ dataItem.firstName }}</span>
@@ -278,8 +278,8 @@
       [width]="150"
     >
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-        <div *ngIf="editingField?.rowIndex === rowIndex && editingField?.field === 'email'; else viewEmail">
-          <input [(ngModel)]="dataItem.email" (blur)="saveFieldEdit(rowIndex, 'email', dataItem.email)" class="form-control form-control-sm" style="width: 100%" />
+        <div *ngIf="editingField?.rowIndex === rowIndex && (editingField?.field === 'email' || editingField?.field === null); else viewEmail">
+          <input [(ngModel)]="gridData.data[rowIndex].email" (blur)="saveFieldEdit(rowIndex, 'email', gridData.data[rowIndex].email)" class="form-control form-control-sm" style="width: 100%" />
         </div>
         <ng-template #viewEmail>
           <span (click)="enableFieldEdit(rowIndex, 'email')">{{ dataItem.email }}</span>
@@ -288,8 +288,8 @@
     </kendo-grid-column>
     <kendo-grid-column field="phoneType" title="Phone Type" [width]="150">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-        <div *ngIf="editingField?.rowIndex === rowIndex && editingField?.field === 'phoneType'; else viewPhoneType">
-          <input [(ngModel)]="dataItem.phoneType" (blur)="saveFieldEdit(rowIndex, 'phoneType', dataItem.phoneType)" class="form-control form-control-sm" style="width: 100%" />
+        <div *ngIf="editingField?.rowIndex === rowIndex && (editingField?.field === 'phoneType' || editingField?.field === null); else viewPhoneType">
+          <input [(ngModel)]="gridData.data[rowIndex].phoneType" (blur)="saveFieldEdit(rowIndex, 'phoneType', gridData.data[rowIndex].phoneType)" class="form-control form-control-sm" style="width: 100%" />
         </div>
         <ng-template #viewPhoneType>
           <span (click)="enableFieldEdit(rowIndex, 'phoneType')">{{ dataItem.phoneType }}</span>
@@ -298,8 +298,8 @@
     </kendo-grid-column>
     <kendo-grid-column field="leadId" title="LMP Lead ID" [width]="135">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-        <div *ngIf="editingField?.rowIndex === rowIndex && editingField?.field === 'leadId'; else viewLeadId">
-          <input [(ngModel)]="dataItem.leadId" (blur)="saveFieldEdit(rowIndex, 'leadId', dataItem.leadId)" class="form-control form-control-sm" style="width: 100%" />
+        <div *ngIf="editingField?.rowIndex === rowIndex && (editingField?.field === 'leadId' || editingField?.field === null); else viewLeadId">
+          <input [(ngModel)]="gridData.data[rowIndex].leadId" (blur)="saveFieldEdit(rowIndex, 'leadId', gridData.data[rowIndex].leadId)" class="form-control form-control-sm" style="width: 100%" />
         </div>
         <ng-template #viewLeadId>
           <span (click)="enableFieldEdit(rowIndex, 'leadId')">{{ dataItem.leadId }}</span>
@@ -313,8 +313,8 @@
       [width]="150"
     >
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-        <div *ngIf="editingField?.rowIndex === rowIndex && editingField?.field === 'appointmentType'; else viewAppointmentType">
-          <input [(ngModel)]="dataItem.appointmentType" (blur)="saveFieldEdit(rowIndex, 'appointmentType', dataItem.appointmentType)" class="form-control form-control-sm" style="width: 100%" />
+        <div *ngIf="editingField?.rowIndex === rowIndex && (editingField?.field === 'appointmentType' || editingField?.field === null); else viewAppointmentType">
+          <input [(ngModel)]="gridData.data[rowIndex].appointmentType" (blur)="saveFieldEdit(rowIndex, 'appointmentType', gridData.data[rowIndex].appointmentType)" class="form-control form-control-sm" style="width: 100%" />
         </div>
         <ng-template #viewAppointmentType>
           <span (click)="enableFieldEdit(rowIndex, 'appointmentType')">{{ dataItem.appointmentType }}</span>
@@ -345,8 +345,8 @@
       [width]="150"
     >
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-        <div *ngIf="editingField?.rowIndex === rowIndex && editingField?.field === 'bookingAgency'; else viewBookingAgency">
-          <input [(ngModel)]="dataItem.bookingAgency" (blur)="saveFieldEdit(rowIndex, 'bookingAgency', dataItem.bookingAgency)" class="form-control form-control-sm" style="width: 100%" />
+        <div *ngIf="editingField?.rowIndex === rowIndex && (editingField?.field === 'bookingAgency' || editingField?.field === null); else viewBookingAgency">
+          <input [(ngModel)]="gridData.data[rowIndex].bookingAgency" (blur)="saveFieldEdit(rowIndex, 'bookingAgency', gridData.data[rowIndex].bookingAgency)" class="form-control form-control-sm" style="width: 100%" />
         </div>
         <ng-template #viewBookingAgency>
           <span (click)="enableFieldEdit(rowIndex, 'bookingAgency')">{{ dataItem.bookingAgency }}</span>
@@ -355,8 +355,8 @@
     </kendo-grid-column>
     <kendo-grid-column field="status" title="Status" [width]="150">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-        <div *ngIf="editingField?.rowIndex === rowIndex && editingField?.field === 'status'; else viewStatus">
-          <input [(ngModel)]="dataItem.status" (blur)="saveFieldEdit(rowIndex, 'status', dataItem.status)" class="form-control form-control-sm" style="width: 100%" />
+        <div *ngIf="editingField?.rowIndex === rowIndex && (editingField?.field === 'status' || editingField?.field === null); else viewStatus">
+          <input [(ngModel)]="gridData.data[rowIndex].status" (blur)="saveFieldEdit(rowIndex, 'status', gridData.data[rowIndex].status)" class="form-control form-control-sm" style="width: 100%" />
         </div>
         <ng-template #viewStatus>
           <span (click)="enableFieldEdit(rowIndex, 'status')">{{ dataItem.status }}</span>
@@ -365,8 +365,8 @@
     </kendo-grid-column>
     <kendo-grid-column field="priority" title="Priority" [width]="150">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-        <div *ngIf="editingField?.rowIndex === rowIndex && editingField?.field === 'priority'; else viewPriority">
-          <input [(ngModel)]="dataItem.priority" (blur)="saveFieldEdit(rowIndex, 'priority', dataItem.priority)" class="form-control form-control-sm" style="width: 100%" />
+        <div *ngIf="editingField?.rowIndex === rowIndex && (editingField?.field === 'priority' || editingField?.field === null); else viewPriority">
+          <input [(ngModel)]="gridData.data[rowIndex].priority" (blur)="saveFieldEdit(rowIndex, 'priority', gridData.data[rowIndex].priority)" class="form-control form-control-sm" style="width: 100%" />
         </div>
         <ng-template #viewPriority>
           <span (click)="enableFieldEdit(rowIndex, 'priority')">{{ dataItem.priority }}</span>
@@ -375,8 +375,8 @@
     </kendo-grid-column>
     <kendo-grid-column field="createdDate" title="Created Date" [width]="200">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-        <div *ngIf="editingField?.rowIndex === rowIndex && editingField?.field === 'createdDate'; else viewCreatedDate">
-          <input [(ngModel)]="dataItem.createdDate" (blur)="saveFieldEdit(rowIndex, 'createdDate', dataItem.createdDate)" class="form-control form-control-sm" style="width: 100%" type="date" />
+        <div *ngIf="editingField?.rowIndex === rowIndex && (editingField?.field === 'createdDate' || editingField?.field === null); else viewCreatedDate">
+          <input [(ngModel)]="gridData.data[rowIndex].createdDate" (blur)="saveFieldEdit(rowIndex, 'createdDate', gridData.data[rowIndex].createdDate)" class="form-control form-control-sm" style="width: 100%" type="date" />
         </div>
         <ng-template #viewCreatedDate>
           <span (click)="enableFieldEdit(rowIndex, 'createdDate')">{{ dataItem.createdDate | date : "yyyy-MM-dd" }}</span>
@@ -385,8 +385,8 @@
     </kendo-grid-column>
     <kendo-grid-column field="updatedDate" title="Updated Date" [width]="200">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-        <div *ngIf="editingField?.rowIndex === rowIndex && editingField?.field === 'updatedDate'; else viewUpdatedDate">
-          <input [(ngModel)]="dataItem.updatedDate" (blur)="saveFieldEdit(rowIndex, 'updatedDate', dataItem.updatedDate)" class="form-control form-control-sm" style="width: 100%" type="date" />
+        <div *ngIf="editingField?.rowIndex === rowIndex && (editingField?.field === 'updatedDate' || editingField?.field === null); else viewUpdatedDate">
+          <input [(ngModel)]="gridData.data[rowIndex].updatedDate" (blur)="saveFieldEdit(rowIndex, 'updatedDate', gridData.data[rowIndex].updatedDate)" class="form-control form-control-sm" style="width: 100%" type="date" />
         </div>
         <ng-template #viewUpdatedDate>
           <span (click)="enableFieldEdit(rowIndex, 'updatedDate')">{{ dataItem.updatedDate | date : "yyyy-MM-dd" }}</span>
@@ -395,8 +395,8 @@
     </kendo-grid-column>
     <kendo-grid-column field="assignedTo" title="Assigned To" [width]="150">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-        <div *ngIf="editingField?.rowIndex === rowIndex && editingField?.field === 'assignedTo'; else viewAssignedTo">
-          <input [(ngModel)]="dataItem.assignedTo" (blur)="saveFieldEdit(rowIndex, 'assignedTo', dataItem.assignedTo)" class="form-control form-control-sm" style="width: 100%" />
+        <div *ngIf="editingField?.rowIndex === rowIndex && (editingField?.field === 'assignedTo' || editingField?.field === null); else viewAssignedTo">
+          <input [(ngModel)]="gridData.data[rowIndex].assignedTo" (blur)="saveFieldEdit(rowIndex, 'assignedTo', gridData.data[rowIndex].assignedTo)" class="form-control form-control-sm" style="width: 100%" />
         </div>
         <ng-template #viewAssignedTo>
           <span (click)="enableFieldEdit(rowIndex, 'assignedTo')">{{ dataItem.assignedTo }}</span>
@@ -405,8 +405,8 @@
     </kendo-grid-column>
     <kendo-grid-column field="department" title="Department" [width]="150">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-        <div *ngIf="editingField?.rowIndex === rowIndex && editingField?.field === 'department'; else viewDepartment">
-          <input [(ngModel)]="dataItem.department" (blur)="saveFieldEdit(rowIndex, 'department', dataItem.department)" class="form-control form-control-sm" style="width: 100%" />
+        <div *ngIf="editingField?.rowIndex === rowIndex && (editingField?.field === 'department' || editingField?.field === null); else viewDepartment">
+          <input [(ngModel)]="gridData.data[rowIndex].department" (blur)="saveFieldEdit(rowIndex, 'department', gridData.data[rowIndex].department)" class="form-control form-control-sm" style="width: 100%" />
         </div>
         <ng-template #viewDepartment>
           <span (click)="enableFieldEdit(rowIndex, 'department')">{{ dataItem.department }}</span>
@@ -415,8 +415,8 @@
     </kendo-grid-column>
     <kendo-grid-column field="region" title="Region" [width]="150">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-        <div *ngIf="editingField?.rowIndex === rowIndex && editingField?.field === 'region'; else viewRegion">
-          <input [(ngModel)]="dataItem.region" (blur)="saveFieldEdit(rowIndex, 'region', dataItem.region)" class="form-control form-control-sm" style="width: 100%" />
+        <div *ngIf="editingField?.rowIndex === rowIndex && (editingField?.field === 'region' || editingField?.field === null); else viewRegion">
+          <input [(ngModel)]="gridData.data[rowIndex].region" (blur)="saveFieldEdit(rowIndex, 'region', gridData.data[rowIndex].region)" class="form-control form-control-sm" style="width: 100%" />
         </div>
         <ng-template #viewRegion>
           <span (click)="enableFieldEdit(rowIndex, 'region')">{{ dataItem.region }}</span>
@@ -425,8 +425,8 @@
     </kendo-grid-column>
     <kendo-grid-column field="comments" title="Comments" [width]="200">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-        <div *ngIf="editingField?.rowIndex === rowIndex && editingField?.field === 'comments'; else viewComments">
-          <textarea [(ngModel)]="dataItem.comments" (blur)="saveFieldEdit(rowIndex, 'comments', dataItem.comments)" class="form-control form-control-sm" style="width: 100%" rows="2"></textarea>
+        <div *ngIf="editingField?.rowIndex === rowIndex && (editingField?.field === 'comments' || editingField?.field === null); else viewComments">
+          <textarea [(ngModel)]="gridData.data[rowIndex].comments" (blur)="saveFieldEdit(rowIndex, 'comments', gridData.data[rowIndex].comments)" class="form-control form-control-sm" style="width: 100%" rows="2"></textarea>
         </div>
         <ng-template #viewComments>
           <span (click)="enableFieldEdit(rowIndex, 'comments')">{{ dataItem.comments }}</span>

@@ -182,8 +182,7 @@ export class LeadManagementComponent implements OnInit {
       region: '',
       comments: '',
       syncToMobile: false,
-
-    };
+    }; // Removed duplicate properties
 
     // Add the new record to the grid data
     const gridCopy = [...this.gridData.data];
@@ -198,13 +197,12 @@ export class LeadManagementComponent implements OnInit {
     this.originalDataItem = JSON.parse(JSON.stringify(newRecord));
 
     // Enable editing for all fields of the new record
-    this.editingField = { rowIndex: 0, field: 'recordId' };
-
-
+    this.editingField = { rowIndex: 0, field: null }; // Set field to null to indicate all fields are editable in create mode
   }
 
   public addRow(): void {
     const newLead = {
+      recordId: this.generateTempId().toString(), // Generate temporary ID
       lastName: '',
       firstName: '',
       email: '',
@@ -228,10 +226,7 @@ export class LeadManagementComponent implements OnInit {
         this.allData.unshift(createdLead);
         this.updateGridData();
       } else {
-        console.warn(
-          'Newly created lead did not return a valid ID:',
-          createdLead
-        );
+        console.warn('New lead did not return a valid ID:', createdLead);
       }
     });
   }
@@ -241,12 +236,12 @@ export class LeadManagementComponent implements OnInit {
   }
 
   // // TEMPORARY ID GENERATOR
-  // private generateTempId(): number {
-  //   const maxId = this.allData.length
-  //     ? Math.max(...this.allData.map((d) => d.id || 0))
-  //     : 0;
-  //   return maxId + 1;
-  // }
+  private generateTempId(): number {
+    const maxId = this.allData.length
+      ? Math.max(...this.allData.map((d) => d.id || 0))
+      : 0;
+    return maxId + 1;
+  }
 
   editingRowIndex: number | null = null;
   originalDataItem: any = null;
