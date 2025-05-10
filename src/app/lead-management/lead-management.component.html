@@ -190,6 +190,7 @@
   </div>
   <!-- Kendo Grid -->
   <kendo-grid
+    #grid
     [data]="gridData"
     [height]="520"
     [sortable]="true"
@@ -209,7 +210,7 @@
     class="kendo-grid"
     (dataStateChange)="onDataStateChange($event)"
   >
-    <!-- Checkbox Column with custom header -->
+
     <kendo-grid-column [width]="50" [columnMenu]="false">
       <!-- Header Checkbox -->
       <ng-template kendoGridHeaderTemplate>
@@ -234,10 +235,13 @@
 
     <!-- Other Columns -->
     <kendo-grid-column field="actions" title="Actions" [width]="150">
-      <ng-template kendoGridCellTemplate let-dataItem>
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
         <button class="custom-btn d-flex align-items-center">
           <i class="bi bi-gear me-1"></i>
           Actions
+        </button>
+        <button *ngIf="newRowIds.has(dataItem.recordId)" class="btn btn-primary btn-sm" (click)="saveNewRow(dataItem)">
+          Save
         </button>
       </ng-template>
     </kendo-grid-column>

@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
@@ -39,7 +39,7 @@ import Swal from 'sweetalert2';
     HttpClientModule,
   ],
 })
-export class LeadManagementComponent implements OnInit {
+export class LeadManagementComponent implements OnInit, AfterViewInit {
   constructor(private leadService: LeadManagementService, private http: HttpClient) {}
 
   @ViewChild('excelExport', { static: false })
@@ -52,6 +52,10 @@ export class LeadManagementComponent implements OnInit {
   ngOnInit(): void {
     this.loadLeads();
     this.loadPreferences(); // Load preferences on initialization
+  }
+
+  ngAfterViewInit(): void {
+    console.log('Grid is:', this.grid); // Ensure the grid is loaded
   }
 
   loadLeads(): void {
@@ -109,7 +113,7 @@ export class LeadManagementComponent implements OnInit {
   selectedLeadValue: string | null = this.defaultLead.value;
   selectedPreferenceValue: string | null = this.defaultPreference.value;
 
-  private _searchKeyword: string = '';
+  private _searchKeyword: string = ''; // Ensure this property exists
 
   get searchKeyword(): string {
     return this._searchKeyword;
@@ -200,9 +204,11 @@ export class LeadManagementComponent implements OnInit {
     this.editingField = { rowIndex: 0, field: null }; // Set field to null to indicate all fields are editable in create mode
   }
 
-  public addRow(): void {
-    const newLead = {
-      recordId: this.generateTempId().toString(), // Generate temporary ID
+  newRowIds: Set<number> = new Set();
+
+  addRow(): void {
+    const newRecord = {
+      recordId: this.generateId(),
       lastName: '',
       firstName: '',
       email: '',
@@ -212,24 +218,42 @@ export class LeadManagementComponent implements OnInit {
       bookingAgency: '',
       status: '',
       priority: '',
-      createdDate: new Date(),
-      updatedDate: new Date(),
+      createdDate: '',
+      updatedDate: '',
       assignedTo: '',
       department: '',
       region: '',
-      comments: '',
-      syncToMobile: false,
+      comments: ''
     };
 
-    this.leadService.addLead(newLead).subscribe((createdLead) => {
-      if (createdLead?.id != null) {
-        this.allData.unshift(createdLead);
-        this.updateGridData();
-      } else {
-        console.warn('New lead did not return a valid ID:', createdLead);
-      }
+    console.log('Adding new record:', newRecord); // Debugging log
+    this.gridData.data.unshift(newRecord);
+    this.newRowIds.add(newRecord.recordId);
+    console.log('New row IDs:', this.newRowIds); // Debugging log
+    this.editingField = { rowIndex: 0, field: null }; // Enable editing for all fields in the new row
+  }
+
+  onCellBlur(record: any, field: string, event: any): void {
+    if (this.newRowIds.has(record.recordId)) {
+      console.log('Skipping auto-save for new row:', record); // Debugging log
+      record[field] = event.target.value; // Update the local value only
+      return;
+    }
+
+    const newValue = event.target.value;
+    if (record[field] !== newValue) {
+      record[field] = newValue;
+      console.log('Updating record:', record); // Debugging log
+      this.updateRecord(record); // PATCH to JSON server
+    }
+  }
+
+  saveNewRow(record: any): void {
+    this.http.post('http://localhost:3000/leads', record).subscribe(() => {
+      this.newRowIds.delete(record.recordId); // Treat as a normal row after saving
     });
   }
+
   formatDate(date: any): string {
     const d = new Date(date);
     return d.toISOString().split('T')[0];
@@ -241,6 +265,14 @@ export class LeadManagementComponent implements OnInit {
       ? Math.max(...this.allData.map((d) => d.id || 0))
       : 0;
     return maxId + 1;
+  }
+
+  generateId(): number {
+    return Date.now(); // Simple unique ID based on timestamp
+  }
+
+  updateRecord(record: any): void {
+    this.http.patch(`http://localhost:3000/leads/${record.recordId}`, record).subscribe();
   }
 
   editingRowIndex: number | null = null;
@@ -428,7 +460,7 @@ export class LeadManagementComponent implements OnInit {
   }
 
   // Add a property to track the currently edited field
-  public editingField: { rowIndex: number; field: string | null } | null = null;
+  public editingField: { rowIndex: number | null; field: string | null } | null = null;
 
   // Method to enable editing for a specific field
   public enableFieldEdit(rowIndex: number, field: string): void {
@@ -488,29 +520,36 @@ export class LeadManagementComponent implements OnInit {
 
   // Save the current column state as a preference
   savePreference(): void {
-    const columnState = this.grid.columns.toArray().map((col: any) => ({
-      field: col.field || '',
-      hidden: col.hidden || false,
-      width: col.width || null,
-    }));
-
-    const preferenceName = window.prompt('Enter a name for this preference:');
-    if (!preferenceName) {
-      console.warn('Preference name is required.');
+    if (!this.grid) {
+      console.error('Grid reference is undefined. Ensure the grid is initialized before calling savePreference.');
       return;
     }
 
-    const newPreference = { name: preferenceName, columns: columnState };
+    const columnOrder = this.grid.columns
+      .map((col: any) => col.field)
+      .filter(Boolean);
 
-    this.http.post('http://localhost:3000/preferences', newPreference).subscribe(
-      () => {
-        console.log('Preference saved successfully.');
-        this.loadPreferences(); // Refresh the dropdown
-      },
-      (error) => {
-        console.error('Failed to save preference:', error);
+    Swal.fire({
+      title: 'Save Preference',
+      input: 'text',
+      inputLabel: 'Preference name',
+      inputPlaceholder: 'Enter preference name',
+      showCancelButton: true,
+      confirmButtonText: 'Save',
+    }).then((result) => {
+      if (result.isConfirmed && result.value) {
+        const preference = {
+          id: Date.now(),
+          name: result.value,
+          columns: columnOrder,
+        };
+
+        this.http.post('http://localhost:3000/preferences', preference).subscribe(() => {
+          console.log('Preference saved successfully using SweetAlert2.');
+          this.loadPreferences();
+        });
       }
-    );
+    });
   }
 
   // Load saved preferences from the server
