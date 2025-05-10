@@ -1452,6 +1452,76 @@
         "region",
         "comments"
       ]
+    },
+    {
+      "id": 1746879042140,
+      "name": "save primary",
+      "columns": [
+        "recordId",
+        "lastName",
+        "firstName",
+        "email",
+        "phoneType"
+      ]
+    },
+    {
+      "id": 1746879054677,
+      "name": "save record",
+      "columns": [
+        "recordId",
+        "lastName",
+        "firstName",
+        "email",
+        "phoneType"
+      ]
+    },
+    {
+      "id": 1746879106026,
+      "name": "save a",
+      "columns": [
+        "actions",
+        "recordId",
+        "lastName",
+        "firstName",
+        "email",
+        "phoneType",
+        "leadId",
+        "appointmentType",
+        "syncToMobile",
+        "bookingAgency",
+        "status",
+        "priority",
+        "createdDate",
+        "updatedDate",
+        "assignedTo",
+        "department",
+        "region",
+        "comments"
+      ]
+    },
+    {
+      "id": 1746879113283,
+      "name": "save a2",
+      "columns": [
+        "actions",
+        "recordId",
+        "lastName",
+        "firstName",
+        "email",
+        "phoneType",
+        "leadId",
+        "appointmentType",
+        "syncToMobile",
+        "bookingAgency",
+        "status",
+        "priority",
+        "createdDate",
+        "updatedDate",
+        "assignedTo",
+        "department",
+        "region",
+        "comments"
+      ]
     }
   ]
 }

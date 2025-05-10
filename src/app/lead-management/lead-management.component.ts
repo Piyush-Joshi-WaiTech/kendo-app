@@ -49,6 +49,17 @@ export class LeadManagementComponent implements OnInit, AfterViewInit {
 
   preferences: any[] = []; // Store saved preferences
 
+  columnsConfig = [
+    { field: 'recordId', title: 'Record Id', width: 150 },
+    { field: 'lastName', title: 'Last Name', width: 150 },
+    { field: 'firstName', title: 'First Name', width: 150 },
+    { field: 'email', title: 'Primary Email Address', width: 150 },
+    { field: 'phoneType', title: 'Phone Type', width: 150 },
+    // Add all other fields here
+  ];
+
+  displayedColumns = [...this.columnsConfig]; // Initial full list
+
   ngOnInit(): void {
     this.loadLeads();
     this.loadPreferences(); // Load preferences on initialization
@@ -570,25 +581,20 @@ export class LeadManagementComponent implements OnInit, AfterViewInit {
   }
 
   // Apply a saved preference to the grid
-  applyPreference(prefName: string): void {
-    const preference = this.preferences.find((p) => p.name === prefName);
-    if (!preference) {
-      console.warn('Preference not found:', prefName);
-      return;
+  applyPreference(preference: any): void {
+    const ordered: string[] = preference.columnOrder;
+
+    this.displayedColumns = ordered
+      .map((field: string) => this.columnsConfig.find(c => c.field === field))
+      .filter((col): col is { field: string; title: string; width: number } => col !== undefined); // Ensure no undefined values
+
+    console.log('Applied column order:', this.displayedColumns);
+  }
+
+  onPreferenceChange(selectedValue: any): void {
+    const selectedPref = this.savedPreferencesOptions.find(p => p.value === selectedValue);
+    if (selectedPref) {
+      this.applyPreference(selectedPref);
     }
-
-    const columnMap = new Map(this.grid.columns.toArray().map((col: any) => [col.field, col]));
-    const reorderedColumns = preference.columns.map((savedCol: any) => {
-      const col = columnMap.get(savedCol.field);
-      if (col) {
-        col.hidden = savedCol.hidden || false;
-        col.width = savedCol.width || null;
-      }
-      return col;
-    });
-
-    // Update the grid's columns
-    this.grid.columns.reset(reorderedColumns);
-    console.log('Applied preference:', prefName);
   }
 }
