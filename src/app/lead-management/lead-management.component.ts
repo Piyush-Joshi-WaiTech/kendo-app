@@ -11,6 +11,7 @@ import {
   GridModule,
   GridDataResult,
   PageChangeEvent,
+  GridComponent,
 } from '@progress/kendo-angular-grid';
 import {
   ExcelExportComponent,
@@ -21,7 +22,7 @@ import {
   WorkbookOptions,
 } from '@progress/kendo-angular-excel-export';
 import { LeadManagementService } from './lead-management.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -39,13 +40,18 @@ import Swal from 'sweetalert2';
   ],
 })
 export class LeadManagementComponent implements OnInit {
-  constructor(private leadService: LeadManagementService) {}
+  constructor(private leadService: LeadManagementService, private http: HttpClient) {}
 
   @ViewChild('excelExport', { static: false })
   excelExport!: ExcelExportComponent;
 
+  @ViewChild('grid', { static: false }) grid!: GridComponent;
+
+  preferences: any[] = []; // Store saved preferences
+
   ngOnInit(): void {
     this.loadLeads();
+    this.loadPreferences(); // Load preferences on initialization
   }
 
   loadLeads(): void {
@@ -483,5 +489,72 @@ export class LeadManagementComponent implements OnInit {
   // Method to cancel field editing
   public cancelFieldEdit(): void {
     this.editingField = null;
+  }
+
+  // Save the current column state as a preference
+  savePreference(): void {
+    const columnState = this.grid.columns.toArray().map((col: any) => ({
+      field: col.field || '',
+      hidden: col.hidden || false,
+      width: col.width || null,
+    }));
+
+    const preferenceName = window.prompt('Enter a name for this preference:');
+    if (!preferenceName) {
+      console.warn('Preference name is required.');
+      return;
+    }
+
+    const newPreference = { name: preferenceName, columns: columnState };
+
+    this.http.post('http://localhost:3000/preferences', newPreference).subscribe(
+      () => {
+        console.log('Preference saved successfully.');
+        this.loadPreferences(); // Refresh the dropdown
+      },
+      (error) => {
+        console.error('Failed to save preference:', error);
+      }
+    );
+  }
+
+  // Load saved preferences from the server
+  loadPreferences(): void {
+    this.http.get<any[]>('http://localhost:3000/preferences').subscribe(
+      (preferences) => {
+        this.preferences = preferences;
+        this.savedPreferencesOptions = preferences.map((pref) => ({
+          text: pref.name,
+          value: pref.name,
+        }));
+        console.log('Loaded preferences:', this.preferences);
+      },
+      (error) => {
+        console.error('Failed to load preferences:', error);
+      }
+    );
+  }
+
+  // Apply a saved preference to the grid
+  applyPreference(prefName: string): void {
+    const preference = this.preferences.find((p) => p.name === prefName);
+    if (!preference) {
+      console.warn('Preference not found:', prefName);
+      return;
+    }
+
+    const columnMap = new Map(this.grid.columns.toArray().map((col: any) => [col.field, col]));
+    const reorderedColumns = preference.columns.map((savedCol: any) => {
+      const col = columnMap.get(savedCol.field);
+      if (col) {
+        col.hidden = savedCol.hidden || false;
+        col.width = savedCol.width || null;
+      }
+      return col;
+    });
+
+    // Update the grid's columns
+    this.grid.columns.reset(reorderedColumns);
+    console.log('Applied preference:', prefName);
   }
 }
