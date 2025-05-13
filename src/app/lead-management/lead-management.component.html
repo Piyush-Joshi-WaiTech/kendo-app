@@ -233,16 +233,19 @@
       </ng-template>
     </kendo-grid-column>
 
-    <!-- Other Columns -->
+    <!-- Actions Column (fixed) -->
     <kendo-grid-column field="actions" title="Actions" [width]="150">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-        <button class="custom-btn d-flex align-items-center">
-          <i class="bi bi-gear me-1"></i>
-          Actions
-        </button>
-        <button *ngIf="newRowIds.has(dataItem.recordId)" class="btn btn-primary btn-sm" (click)="saveNewRow(dataItem)">
-          Save
-        </button>
+        <div class="d-flex align-items-center gap-2">
+          <button class="custom-btn d-flex align-items-center" *ngIf="!(isCreatingNewRecord && rowIndex === 0)">
+            <i class="bi bi-gear me-1"></i>
+            Actions
+          </button>
+          <!-- Show Save button only for new record in creation mode -->
+          <button *ngIf="isCreatingNewRecord && rowIndex === 0" class="btn btn-success btn-sm ms-2" (click)="saveNewRow(dataItem)">
+            <i class="bi bi-save me-1"></i> Save
+          </button>
+        </div>
       </ng-template>
     </kendo-grid-column>
     <kendo-grid-column field="recordId" title="Record Id" [width]="150">

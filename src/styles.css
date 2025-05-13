@@ -158,24 +158,24 @@ body.dark-mode .nav-tab.lead-management-tab {
   background-color: #1e1e1e !important;
   color: white !important;
 }
-/* ✅ Override row hover background and text in dark mode */
+/*  Override row hover background and text in dark mode */
 body.dark-mode .kendo-grid .k-grid-content tr:hover {
   background-color: #8bc34a !important; /* Green background */
   color: white !important; /* Ensure text stays white */
 }
 
-/* ✅ Also override cell hover in case Kendo applies to individual cells */
+/*  Also override cell hover in case Kendo applies to individual cells */
 body.dark-mode .kendo-grid .k-grid-content td:hover {
   background-color: #8bc34a !important;
   color: white !important;
 }
 
-/* ✅ If white background still appears, this forces it off */
+/*  If white background still appears, this forces it off */
 body.dark-mode .kendo-grid .k-grid-content tr:hover td {
   background-color: transparent !important;
 }
 
-/* ✅ Make sure selection doesn’t conflict with hover */
+/*  Make sure selection doesn’t conflict with hover */
 body.dark-mode .kendo-grid .k-grid-content tr.k-state-selected:hover {
   background-color: #7cb342 !important;
   color: white !important;

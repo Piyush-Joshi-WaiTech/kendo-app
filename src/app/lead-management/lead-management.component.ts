@@ -66,7 +66,7 @@ export class LeadManagementComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    console.log('Grid is:', this.grid); // Ensure the grid is loaded
+    console.log('Grid is:', this.grid); // for the grid is loaded
   }
 
   loadLeads(): void {
@@ -213,6 +213,9 @@ export class LeadManagementComponent implements OnInit, AfterViewInit {
 
     // Enable editing for all fields of the new record
     this.editingField = { rowIndex: 0, field: null }; // Set field to null to indicate all fields are editable in create mode
+
+    // Add a flag to indicate new record creation mode
+    this.isCreatingNewRecord = true;
   }
 
   newRowIds: Set<number> = new Set();
@@ -237,24 +240,23 @@ export class LeadManagementComponent implements OnInit, AfterViewInit {
       comments: ''
     };
 
-    console.log('Adding new record:', newRecord); // Debugging log
+    console.log('Adding new record:', newRecord); // Debugging
     this.gridData.data.unshift(newRecord);
     this.newRowIds.add(newRecord.recordId);
-    console.log('New row IDs:', this.newRowIds); // Debugging log
+    console.log('New row IDs:', this.newRowIds); // Debugging
     this.editingField = { rowIndex: 0, field: null }; // Enable editing for all fields in the new row
   }
 
   onCellBlur(record: any, field: string, event: any): void {
-    if (this.newRowIds.has(record.recordId)) {
-      console.log('Skipping auto-save for new row:', record); // Debugging log
-      record[field] = event.target.value; // Update the local value only
+    // Only auto-save for existing records, not for new ones
+    if (!record.id) {
+      // New record: just update the local value,  not call updateRecord
+      record[field] = event.target.value;
       return;
     }
-
     const newValue = event.target.value;
     if (record[field] !== newValue) {
       record[field] = newValue;
-      console.log('Updating record:', record); // Debugging log
       this.updateRecord(record); // PATCH to JSON server
     }
   }
@@ -262,6 +264,9 @@ export class LeadManagementComponent implements OnInit, AfterViewInit {
   saveNewRow(record: any): void {
     this.http.post('http://localhost:3000/leads', record).subscribe(() => {
       this.newRowIds.delete(record.recordId); // Treat as a normal row after saving
+      this.isCreatingNewRecord = false;
+      this.editingField = null;
+      this.editingRowIndex = null;
     });
   }
 
@@ -327,7 +332,7 @@ export class LeadManagementComponent implements OnInit, AfterViewInit {
         this.updateGridData();
         this.editingRowIndex = null;
 
-        // ✅ SweetAlert success for adding a new lead
+        // SweetAlert success for adding a new lead
         Swal.fire({
           icon: 'success',
           title: 'Lead Added',
@@ -348,7 +353,7 @@ export class LeadManagementComponent implements OnInit, AfterViewInit {
         }
         this.editingRowIndex = null;
 
-        // ✅ SweetAlert success for updating an existing lead
+        //  SweetAlert success for updating an existing lead
         Swal.fire({
           icon: 'success',
           title: 'Lead Updated',
@@ -393,7 +398,7 @@ export class LeadManagementComponent implements OnInit, AfterViewInit {
       if (result.isConfirmed) {
         this.leadService.deleteLead(dataItem.id).subscribe(
           () => {
-            console.log(`✅ Lead with ID ${dataItem.id} deleted from db.json`);
+            console.log(` Lead with ID ${dataItem.id} deleted from db.json`);
             this.allData = this.allData.filter(
               (item) => item.id !== dataItem.id
             );
@@ -473,55 +478,44 @@ export class LeadManagementComponent implements OnInit, AfterViewInit {
   // Add a property to track the currently edited field
   public editingField: { rowIndex: number | null; field: string | null } | null = null;
 
+  // Add a flag to track new record creation mode
+  public isCreatingNewRecord: boolean = false;
+
   // Method to enable editing for a specific field
   public enableFieldEdit(rowIndex: number, field: string): void {
+    if (this.isCreatingNewRecord && rowIndex === 0) {
+      // Do not change editingField if creating a new record
+      return;
+    }
     this.editingField = { rowIndex, field };
   }
 
   // Method to save the edited field
   public saveFieldEdit(rowIndex: number, field: string, value: any): void {
-    const updatedLead = { ...this.gridData.data[rowIndex], [field]: value };
-
-    if (!updatedLead.id) {
-      // Save new lead to the server
-      this.leadService.addLead(updatedLead).subscribe((createdLead) => {
-        if (createdLead?.id != null) {
-          this.allData[0] = createdLead;
-          this.updateGridData();
-          this.editingField = null; // Exit edit mode
-
-          // SweetAlert success for adding a new lead
-          Swal.fire({
-            icon: 'success',
-            title: 'Lead Added',
-            text: 'The new lead has been successfully created!',
-            timer: 2000,
-            showConfirmButton: false,
-          });
-        } else {
-          console.warn('Newly created lead did not return a valid ID:', createdLead);
-        }
-      });
-    } else {
-      // Update existing lead
-      this.leadService.updateLead(updatedLead.id, updatedLead).subscribe(() => {
-        const index = this.allData.findIndex((item) => item.id === updatedLead.id);
-        if (index !== -1) {
-          this.allData[index] = updatedLead;
-          this.updateGridData();
-        }
-        this.editingField = null; // Exit edit mode
-
-        // SweetAlert success for updating a field
-        Swal.fire({
-          icon: 'success',
-          title: 'Field Updated',
-          text: 'The field has been successfully updated!',
-          timer: 2000,
-          showConfirmButton: false,
-        });
-      });
+    // Prevent auto-save for new records (no id)
+    const row = this.gridData.data[rowIndex];
+    if (!row.id) {
+      // Only update the local value, do not call backend or exit edit mode
+      row[field] = value;
+      // Do not set this.editingField = null here!
+      return;
     }
+    const updatedLead = { ...row, [field]: value };
+    this.leadService.updateLead(updatedLead.id, updatedLead).subscribe(() => {
+      const index = this.allData.findIndex((item) => item.id === updatedLead.id);
+      if (index !== -1) {
+        this.allData[index] = updatedLead;
+        this.updateGridData();
+      }
+      this.editingField = null; // Exit edit mode for existing records only
+      Swal.fire({
+        icon: 'success',
+        title: 'Field Updated',
+        text: 'The field has been successfully updated!',
+        timer: 2000,
+        showConfirmButton: false,
+      });
+    });
   }
 
   // Method to cancel field editing

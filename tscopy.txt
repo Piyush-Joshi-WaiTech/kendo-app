@@ -1,0 +1,260 @@
+<div class="page-toolbar d-flex justify-content-between align-items-center">
+  <div class="page-title mt-2">Lead Management</div>
+
+  <div class="action-buttons d-flex align-items-center">
+    <div class="form-check d-flex align-items-center me-5">
+      <input
+        class="form-check-input me-1 mt-2"
+        type="checkbox"
+        id="boardView"
+      />
+      <label class="form-check-label mt-2" for="boardView">Board View</label>
+    </div>
+
+    <button
+      class="custom-btn d-flex align-items-center me-5"
+      (click)="exportToExcel()"
+    >
+      <i class="bi bi-download me-1 mt-2"></i>
+      Export to Excel
+    </button>
+    <kendo-excelexport
+      #excelExport
+      [data]="gridData.data"
+      fileName="LeadManagementData.xlsx"
+    >
+      <kendo-excelexport-column
+        field="recordId"
+        title="Record Id"
+      ></kendo-excelexport-column>
+      <kendo-excelexport-column
+        field="lastName"
+        title="Last Name"
+      ></kendo-excelexport-column>
+      <kendo-excelexport-column
+        field="firstName"
+        title="First Name"
+      ></kendo-excelexport-column>
+      <kendo-excelexport-column
+        field="email"
+        title="Primary Email Address"
+      ></kendo-excelexport-column>
+      <kendo-excelexport-column
+        field="phoneType"
+        title="Phone Type"
+      ></kendo-excelexport-column>
+      <kendo-excelexport-column
+        field="leadId"
+        title="LMP Lead ID"
+      ></kendo-excelexport-column>
+      <kendo-excelexport-column
+        field="appointmentType"
+        title="Appointment Type"
+      ></kendo-excelexport-column>
+      <kendo-excelexport-column
+        field="syncToMobile"
+        title="Sync to Mobile"
+      ></kendo-excelexport-column>
+      <kendo-excelexport-column
+        field="bookingAgency"
+        title="Booking Agency"
+      ></kendo-excelexport-column>
+      <kendo-excelexport-column
+        field="status"
+        title="Status"
+      ></kendo-excelexport-column>
+      <kendo-excelexport-column
+        field="priority"
+        title="Priority"
+      ></kendo-excelexport-column>
+      <kendo-excelexport-column
+        field="createdDate"
+        title="Created Date"
+      ></kendo-excelexport-column>
+      <kendo-excelexport-column
+        field="updatedDate"
+        title="Updated Date"
+      ></kendo-excelexport-column>
+      <kendo-excelexport-column
+        field="assignedTo"
+        title="Assigned To"
+      ></kendo-excelexport-column>
+      <kendo-excelexport-column
+        field="department"
+        title="Department"
+      ></kendo-excelexport-column>
+      <kendo-excelexport-column
+        field="region"
+        title="Region"
+      ></kendo-excelexport-column>
+      <kendo-excelexport-column
+        field="comments"
+        title="Comments"
+      ></kendo-excelexport-column>
+    </kendo-excelexport>
+    <button
+      class="custom-btn"
+      (click)="editingRowIndex === null ? addRecord() : cancelEdit()"
+    >
+      {{ editingRowIndex === null ? "Create" : "Cancel" }}
+    </button>
+  </div>
+</div>
+
+<div class="filters-container">
+  <div
+    class="filters-row d-flex justify-content-start align-items-center gap-3"
+  >
+    <div class="filters-group d-flex align-items-center gap-3 flex-grow-1">
+      <kendo-dropdownlist
+        [data]="allLeadsOptions"
+        [(ngModel)]="selectedLeadValue"
+        [defaultItem]="defaultLead"
+        textField="text"
+        valueField="value"
+        class="kendo-dropdown all-leads-dropdown"
+      ></kendo-dropdownlist>
+
+      <kendo-dropdownlist
+        [data]="savedPreferencesOptions"
+        [(ngModel)]="selectedPreferenceValue"
+        [defaultItem]="defaultPreference"
+        textField="text"
+        valueField="value"
+        class="kendo-dropdown saved-pref-dropdown"
+      >
+        <ng-template kendoDropDownListItemTemplate let-dataItem>
+          <div
+            class="dropdown-item d-flex justify-content-between align-items-center"
+          >
+            <span class="dropdown-text">{{ dataItem.text }}</span>
+            <button
+              class="btn btn-link p-0 delete-btn"
+              (click)="deletePreference(dataItem)"
+              title="Delete"
+            >
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+        </ng-template>
+      </kendo-dropdownlist>
+
+      <!-- Search Bar -->
+      <div class="search-bar">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Type Search Keyword"
+          [(ngModel)]="searchKeyword"
+        />
+      </div>
+
+      <!-- Search Icon -->
+      <div class="search-icon">
+        <button class="search-btn">
+          <i class="bi bi-search"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Toggle Button -->
+    <div class="toggle-wrapper">
+      <div class="toggle-group">
+        <button
+          class="toggle-btn"
+          [class.active]="activeToggle === 'Non-Intl'"
+          (click)="setActiveToggle('Non-Intl')"
+        >
+          Non-Intl
+        </button>
+        <button
+          class="toggle-btn"
+          [class.active]="activeToggle === 'Intl'"
+          (click)="setActiveToggle('Intl')"
+        >
+          Intl
+        </button>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons d-flex align-items-center gap-2">
+      <button class="custom-btn">Clear Filters</button>
+      <button class="custom-btn">Bulk Edit</button>
+      <button class="custom-btn" (click)="savePreference()">Save Preferences</button>
+
+      <button class="custom-btn hamburger-btn d-flex align-items-center">
+        <i class="bi bi-list"></i>
+      </button>
+    </div>
+  </div>
+  <!-- Kendo Grid -->
+  <kendo-grid
+    #grid
+    [data]="gridData"
+    [height]="520"
+    [sortable]="true"
+    [sort]="gridState.sort"
+    [skip]="gridState.skip"
+    [pageSize]="gridState.take"
+    [pageable]="{ buttonCount: 5, pageSizes: [5, 10, 20, 50, 100], info: true }"
+    [filterable]="false"
+    [resizable]="true"
+    [reorderable]="true"
+    [columnMenu]="true"
+    [pageSize]="pageSize"
+    [skip]="skip"
+    (pageChange)="pageChange($event)"
+    [rowClass]="rowClass"
+    scrollable="scrollable"
+    class="kendo-grid"
+    (dataStateChange)="onDataStateChange($event)"
+  >
+    <!-- Selection Checkbox Column (fixed) -->
+    <kendo-grid-column [width]="50" [columnMenu]="false">
+      <ng-template kendoGridHeaderTemplate>
+        <input
+          type="checkbox"
+          class="form-check-input"
+          [checked]="allSelected"
+          (change)="toggleSelectAll($event)"
+        />
+      </ng-template>
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <input
+          type="checkbox"
+          class="form-check-input"
+          [checked]="selectedRows.has(dataItem.recordId)"
+          (change)="onRowSelectChange(dataItem)"
+        />
+      </ng-template>
+    </kendo-grid-column>
+
+    <!-- Dynamic Data Columns -->
+    <kendo-grid-column *ngFor="let col of displayedColumns"
+      [field]="col.field"
+      [title]="col.title"
+      [width]="col.width"
+      [columnMenu]="true"
+      [resizable]="true"
+      [reorderable]="true"
+    >
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <span>{{ dataItem[col.field] }}</span>
+      </ng-template>
+    </kendo-grid-column>
+
+    <!-- Actions Column (fixed) -->
+    <kendo-grid-column field="actions" title="Actions" [width]="150">
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <button class="custom-btn d-flex align-items-center">
+          <i class="bi bi-gear me-1"></i>
+          Actions
+        </button>
+        <button *ngIf="newRowIds.has(dataItem.recordId)" class="btn btn-primary btn-sm" (click)="saveNewRow(dataItem)">
+          Save
+        </button>
+      </ng-template>
+    </kendo-grid-column>
+  </kendo-grid>
+</div>
